@@ -1,0 +1,48 @@
+<div class="container" *ngIf="favorite$.length > 0">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Sản phẩm yêu thích</h4>
+    </div>
+  </div>
+  <div class="row m-0 p-0 rollable" style="max-height: 550px;">
+    <div *ngFor="let item of favorite$ let i = index">
+      <hr style="color: #DADADA;">
+      <div class="row" [ngClass]="item.status != 'STOCK' ? 'sold-out' : ''" (click)="productItem(item)">
+        <div class="col-md-1 sttstyle">
+          <span>{{i + 1}}</span>
+        </div>
+        <div class="col-md-2">
+          <img src="{{'data:image/jpg;base64,' + item.photo}}" alt="" class="w-10 shadow-2 resizeImg img-thumbnail"/>
+        </div>
+        <div class="col-md-6">
+          <div class="row">
+            <span>{{item.name}}</span>
+          </div>
+          <div class="row mt-3">
+            <span class="fs-10">Thương hiệu: {{item.brandName}}</span>
+            <span class="fs-10">Danh mục: {{item.categoryName}}</span>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <span style="color: #ee4d2d;" *ngIf="item.minPrice == item.maxPrice">{{item.minPrice.toFixed(0) | currency:'VND'}}.000</span>
+          <span style="color: #ee4d2d;" *ngIf="item.minPrice != item.maxPrice">{{item.minPrice.toFixed(0) | currency:'VND'}}.000 - {{item.maxPrice.toFixed(0) | currency:'VND'}}.000</span>
+        </div>
+        <div class="col-md-1" style="text-align: center;">
+          <i class="fas fa-close"></i>&nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="favorite$.length == 0">
+  <div class="row">
+    <div class="col-md-12">
+      <h4>Sản phẩm yêu thích</h4>
+    </div>
+  </div>
+  <hr style="color: #DADADA;">
+  <div class="row">
+    <i style="text-align: center;">Không có dữ liệu</i>
+  </div>
+</div>

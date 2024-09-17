@@ -1,0 +1,57 @@
+input {
+  font-size: 15px;
+}
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+textarea {
+  font-size: 15px;
+}
+.resizeDf {
+  width: 70%
+}
+.resizeImg {
+  width: 80px;
+  height: 80px;
+}
+//---------P-Dropdown
+::ng-deep .p-dropdown {
+  border-radius: 7px;
+  width: 100%;
+}
+::ng-deep .p-dropdown .p-dropdown-label.p-placeholder {
+  color: #969292;
+}
+::ng-deep .p-inputtext {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  border-radius: 20px;
+}
+::ng-deep .p-dropdown-item {
+  font-size: 16px;
+}
+::ng-deep .p-icon {
+  width: 12px;
+  height: 12px;
+}
+::ng-deep .p-dropdown-filter-icon {
+  margin-top: -4px;
+}
+::ng-deep .p-dropdown-clear-icon {
+  margin-top: -6px;
+}
+::placeholder {
+  color: #969292;
+}

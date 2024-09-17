@@ -1,0 +1,25 @@
+<div class="container">
+  <div class="row">
+    <div class="col-lg-12">
+    <mat-tab-group dynamicHeight [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="Thông tin cá nhân">
+        <ng-template matTabContent>
+          <app-user-item (tabChangeRequested)="onTabChangeRequested($event)"></app-user-item>
+        </ng-template>
+      </mat-tab>
+      <!-- <mat-tab
+        label="Địa chỉ">
+        <ng-template matTabContent>
+          <app-address (tabChangeRequested)="onTabChangeRequested($event)"></app-address>
+        </ng-template>
+      </mat-tab> -->
+      <mat-tab
+        label="Đổi mật khẩu">
+        <ng-template matTabContent>
+          <app-change-password (tabChangeRequested)="onTabChangeRequested($event)"></app-change-password>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    </div>
+  </div>
+</div>

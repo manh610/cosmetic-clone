@@ -1,0 +1,192 @@
+<div class="modal-header">
+  <h2 class="modal-title text-uppercase" id="modal-basic-title">Gắn mã giảm giá</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <mat-tab-group dynamicHeight>
+        <mat-tab label="Mã giảm giá cho người dùng">
+          <ng-template matTabContent>
+            <div class="container">
+              <div class="row mt-3">
+                  <div class="col-md-3">
+                    <div class="actions">
+                      <button class="btn-reload ml-2" data-toggle="tooltip" data-placement="top" title="Tải lại" (click)="reloadUser()">
+                        <i class="fa fa-refresh"></i>&nbsp;
+                        <span>Tải lại</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" [(ngModel)]="roleId" (change)="initUser()" placeholder="Tìm kiếm theo chức vụ">
+                        <option value="">Tất cả chức vụ</option>
+                        <option value="01">Người dùng</option>
+                        <option value="02">Người giao hàng</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" [(ngModel)]="userRank" (change)="initUser()" placeholder="Tìm kiếm theo cấp bậc">
+                        <option value="">Tất cả cấp bậc</option>
+                        <option value="PRIORITY">Tài khoản ưu tiên</option>
+                        <option value="MEMBER">Thành viên</option>
+                        <option value="SILVER">Cấp bạc</option>
+                        <option value="GOLD">Cấp vàng</option>
+                        <option value="DIAMONDS">Cấp kim cương</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="input-icon right">
+                      <i class="fa fa-search" (click)="initUser()"></i>
+                      <input type="text" [(ngModel)]="keywordUser" (keyup.enter)="initUser()"
+                            class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+                    </div>
+                  </div>
+              </div>
+              <div class="row mt-2">
+                <p-table
+                [value]="user$"
+                [tableStyle]="{ 'min-width': '30rem' }"
+                dataKey="username"
+                [paginator]="true" [rows]="10">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 5%" style="text-align: center;">
+                          <mat-checkbox class="example-margin" [checked]="checkedAllUser" (change)="onCheckboxChangeAllUser()">
+                          </mat-checkbox>
+                        </th>
+                        <th style="width:5%">STT</th>
+                        <th style="width:20%">Tài khoản</th>
+                        <th style="width:25%">Họ và tên</th>
+                        <th style="width:20%">Cấp bậc</th>
+                        <th style="width:25%">Email</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-user let-row let-i="rowIndex">
+                    <tr>
+                        <td>
+                          <mat-checkbox class="example-margin" [checked]="user.checked" (change)="onCheckboxChangeUser(user)" [disabled]="user.disabled">
+                          </mat-checkbox>
+                        </td>
+                        <td>{{ i + 1 }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.familyName }} {{user.givenName}}</td>
+                        <td>{{ user.userRank }}</td>
+                        <td>{{ user.email }}</td>
+                    </tr>
+                </ng-template>
+                </p-table>
+                <div class="mt-2">
+                  <span class="send" data-toggle="tooltip" data-placement="top" title="Gắn mã" (click)="sendToUser()">
+                    <strong>Tổng {{userSelected.length}} bản ghi được chọn</strong>&nbsp;
+                    <i class="fa-solid fa-paper-plane"></i></span>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+        <mat-tab label="Mã giảm giá cho sản phẩm">
+          <ng-template matTabContent>
+            <div class="container">
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <div class="actions  0">
+                    <button class="btn-reload ml-2" data-toggle="tooltip" data-placement="top" title="Tải lại" (click)="reloadProduct()">
+                      <i class="fa fa-refresh"></i>&nbsp;
+                      <span>Tải lại</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Filter -->
+              <div class="row mt-1">
+                <div class="col-md-3">
+                  <p-dropdown [options]="brand$" [(ngModel)]="brandId" [filter]="true" optionLabel="name" optionValue="id"
+                                  [showClear]="true" placeholder="Lọc theo thương hiệu sản phẩm" (ngModelChange)="initProduct()"></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <p-dropdown [options]="skinType$" [(ngModel)]="skinTypeId" [filter]="true" optionLabel="name" optionValue="id"
+                                  [showClear]="true" placeholder="Lọc theo loại da" (ngModelChange)="initProduct()"></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <p-dropdown [options]="category$" [(ngModel)]="categoryId" [filter]="true" optionLabel="name" optionValue="id"
+                                  [showClear]="true" placeholder="Lọc theo danh mục" (ngModelChange)="initProduct()"></p-dropdown>
+                </div>
+                <div class="col-md-3">
+                  <div class="input-icon right">
+                    <i class="fa fa-search" (click)="initProduct()"></i>
+                    <input type="text" [(ngModel)]="keywordProduct" (keyup.enter)="initProduct()"
+                          class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+                  </div>
+                </div>
+              </div>
+              <div class="row mt-2">
+                <p-table
+                [value]="product$"
+                dataKey="code"
+                [paginator]="true" [rows]="5"
+                [tableStyle]="{ 'min-width': '30rem' }">
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th style="width: 5%" style="text-align: center;">
+                          <mat-checkbox class="example-margin" [checked]="checkedAllProduct" (change)="onCheckboxChangeAllProduct()">
+                          </mat-checkbox>
+                        </th>
+                        <th style="width:5%">STT</th>
+                        <th style="width:20%">Ký hiệu</th>
+                        <th style="width:25%">Tên</th>
+                        <th style="width:15%">Danh mục</th>
+                        <th style="width:15%">Thương hiệu</th>
+                        <th style="width:15%">Trạng thái</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product let-row let-i="rowIndex">
+                    <tr class="v" data-toggle="tooltip" data-placement="top" title="Xem biến thể">
+                        <td>
+                          <mat-checkbox class="example-margin" [checked]="product.checked" (change)="onCheckboxChangeProduct(product)" [disabled]="product.disabled">
+                          </mat-checkbox>
+                        </td>
+                        <td (click)="openVariant(product)">{{ i + 1 }}</td>
+                        <td (click)="openVariant(product)">{{ product.code }}</td>
+                        <td (click)="openVariant(product)">{{ product.name }}</td>
+                        <td (click)="openVariant(product)">{{ product.categoryName }}</td>
+                        <td (click)="openVariant(product)">{{ product.brandName }}</td>
+                        <td (click)="openVariant(product)">{{ product.status == 'STOCK'?'Còn hàng':'Hết hàng'}}</td>
+                    </tr>
+                </ng-template>
+                </p-table>
+                <div class="row mt-2 mb-2">
+                  <div class="col-md-7">
+                    <span class="send" data-toggle="tooltip" data-placement="top" title="Gắn mã" (click)="send()">
+                      <strong>Tổng {{productSelected.length + totalProduct}} bản ghi được chọn</strong>&nbsp;
+                      <i class="fa-solid fa-paper-plane"></i></span>
+                  </div>
+                  <div class="col-md-2">
+                    <span>Nhập số lượt sử dụng cho mã giảm giá</span>
+                  </div>
+                  <div class="col-md-3">
+                    <input type="number" min="1" [(ngModel)]="quantityDiscount"
+                            class="form-control" placeholder="Nhập số lượt sử dụng">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+    <i class="fas fa-close"></i>&nbsp;
+    <span>Hủy</span></button>
+</div>

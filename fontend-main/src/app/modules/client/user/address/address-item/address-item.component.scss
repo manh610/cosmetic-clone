@@ -1,0 +1,69 @@
+input {
+  font-size: 15px;
+}
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+textarea {
+  font-size: 15px;
+}
+::placeholder {
+  color: #969292;
+}
+.default {
+  width: 80px;
+  padding: 3px 10px;
+  text-align: center;
+  border: 1px solid #FF4D2D;
+  color: #FF4D2D;
+  cursor: pointer;
+}
+.take {
+  width: 120px;
+  padding: 3px 10px;
+  text-align: center;
+  border: 1px solid #0000008A;
+  color: #0000008A;
+  cursor: pointer;
+}
+
+//---------P-Dropdown
+::ng-deep {
+  .p-dropdown {
+    border-radius: var(--bs-border-radius);
+    width: 100%;
+  }
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    color: #969292;
+  }
+  .p-inputtext {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+  .p-dropdown-item {
+    font-size: 16px;
+  }
+  .p-icon {
+    width: 12px;
+    height: 12px;
+  }
+  .p-dropdown-filter-icon {
+    margin-top: -4px;
+  }
+  .p-dropdown-clear-icon {
+    margin-top: -6px;
+  }
+}

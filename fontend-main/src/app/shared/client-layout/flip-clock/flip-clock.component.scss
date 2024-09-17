@@ -1,0 +1,18 @@
+.flip-clock {
+  display: flex;
+  justify-content: center;
+}
+
+.flip-clock-segment {
+  text-align: center;
+  margin: 0 3px; /* Khoảng cách giữa các cột */
+}
+
+.flip-clock-digit {
+  font-size: 13px; /* Kích thước chữ số */
+  font-weight: 500;
+  background-color: #333; /* Màu nền của chữ số */
+  color: #fff; /* Màu chữ số */
+  border-radius: 3px; /* Bo góc của chữ số */
+  padding: 1px 3px; /* Khoảng cách giữa chữ số và khung */
+}

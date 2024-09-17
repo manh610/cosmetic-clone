@@ -1,0 +1,94 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'add'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thêm mới địa chỉ</h2>
+  </div>
+  <div *ngIf="formType == 'edit'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật địa chỉ</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="addressFrm" class="form-horizontal">
+    <div class="form-body">
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin địa chỉ</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Họ và tên</span><span class="required"> * </span></label>
+                <input type="text" formControlName="fullName" class="form-control" placeholder="Nhập học và tên">
+                <small *ngIf="hasErrorInput('fullName', 'required')" class="p-error">
+                  <p>Họ và tên không để trống</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Số điện thoại</span><span class="required"> * </span></label>
+                <input type="text" formControlName="phone" class="form-control" placeholder="Nhập số điện thoại">
+                <small *ngIf="hasErrorInput('phone', 'required')" class="p-error">
+                  <p>Số điện thoại không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('phone', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 9, chỉ nhập số</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-4">
+              <label class="control-label"><span>Tỉnh/Thành phố</span><span class="required"> * </span></label>
+              <p-dropdown [options]="province$" formControlName="provinceId" [filter]="true" optionLabel="fullName" optionValue="id"
+                                [showClear]="true" placeholder="Chọn Tỉnh/Thành phố" (onClick)="selectProvince()" (onClear)="clearProvince()"></p-dropdown>
+              <small *ngIf="hasErrorInput('provinceId', 'required')" class="p-error">
+                <p>Tỉnh/Thành phố không để trống</p>
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label class="control-label"><span>Quận/Huyện</span><span class="required"> * </span></label>
+              <p-dropdown [options]="district$" formControlName="districtId" [filter]="true" optionLabel="fullName" optionValue="id"
+                                [showClear]="true" placeholder="Chọn Quận/Huyện" (onClick)="selectDistrict()" (onClear)="clearDistrict()"></p-dropdown>
+              <small *ngIf="hasErrorInput('districtId', 'required')" class="p-error">
+                <p>Quận/Huyện không để trống</p>
+              </small>
+            </div>
+            <div class="col-md-4">
+              <label class="control-label"><span>Phường/Xã</span><span class="required"> * </span></label>
+              <p-dropdown [options]="ward$" formControlName="wardId" [filter]="true" optionLabel="fullName" optionValue="id"
+                                [showClear]="true" placeholder="Chọn Phường/Xã"></p-dropdown>
+              <small *ngIf="hasErrorInput('wardId', 'required')" class="p-error">
+                <p>Phường/Xã không để trống</p>
+              </small>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="detail" class="control-label"><span>Địa chỉ cụ thể</span></label>
+                <textarea class="form-control" formControlName="detail" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <label class="control-label mb-1"><span>Loại địa chỉ</span></label>
+            <div class="col-md-12">
+              <span class="{{isHome ? 'default' : 'take'}} mr-2" (click)="changeAddressType(1)">Nhà riêng</span>
+              <span class="{{!isHome ? 'default' : 'take'}} ml-2" (click)="changeAddressType(2)">Văn phòng</span>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;"  (click)="onSubmit()"
+      data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

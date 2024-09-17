@@ -1,0 +1,28 @@
+<div class="portlet light bordered">
+  <div class="portlet-title d-flex justify-content-between align-items-center">
+    <div class="caption">
+      <i class="fa fa-bell font-green mr-1"></i>
+      <span class="caption-subject font-green text-uppercase">Đơn hàng chờ duyệt</span>
+    </div>
+  </div>
+  <div class="portlet-body">
+    <div class="me-3">
+      <div class="row align-items-center m-0 py-2" *ngFor="let item of order$;">
+        <div class="col-md-10" (click)="routerOrder(item)" style="cursor: pointer;">
+          <i class="fa-solid fa-circle-user mr-2" style="font-size: 30px;" *ngIf="!item.avatar"></i>
+          <img src="data:image/jpg;base64,{{item.avatar}}" [alt]="" class="resizeAvatar mr-2" *ngIf="item.avatar">
+          <span style="color: #969292;" class="mr-2">{{item.username}}</span>
+          <span style="color: #969292;">Ngày đặt hàng: {{item.orderDate | date:'YYYY-MM-dd'}}</span>
+        </div>
+        <div class="col-md-2 p-0 d-flex justify-content-end">
+          <div class="btn-group" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-success btn-sm" data-toggle="tooltip" data-placement="top"
+              title="Duyệt đơn hàng" (click)="btnAccept(item)">
+              <span>Duyệt</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

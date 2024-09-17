@@ -1,0 +1,47 @@
+input {
+  font-size: 15px;
+}
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+textarea {
+  font-size: 15px;
+}
+.resizeDf {
+  width: 50%
+}
+.resizeImg {
+  width: 80px;
+  height: 80px;
+}
+::placeholder {
+  color: #969292;
+}
+.date-picker-container {
+  display: flex;
+  align-items: center;
+}
+.date-picker-icon {
+  cursor: pointer;
+  /* Thêm các kiểu khác như màu sắc hoặc hiệu ứng */
+}
+::ng-deep .cdk-overlay-container {
+  z-index: 9999;
+}
+.vat {
+  padding: 10px 12px 0px 12px;
+  border-radius: 3px;
+  background-color: #e4e4e4;
+}

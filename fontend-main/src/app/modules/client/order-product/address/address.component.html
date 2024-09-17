@@ -1,0 +1,41 @@
+<div class="modal-header">
+  <h2 class="modal-title text-uppercase" id="modal-basic-title">Địa Chỉ Của Tôi</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <div class="flex flex-column gap-3">
+    <div *ngFor="let address of address$" class="field-checkbox">
+      <p-radioButton [inputId]="address.id" name="address" [value]="address.id" [(ngModel)]="selectedAddress"></p-radioButton>
+      <div class="row ml-1">
+        <div class="col-md-9">
+          <div class="row">
+            <span><strong>{{ address.fullName }} </strong> | <span style="color: #969292;">(+84) {{ address.phone}}</span></span>
+            <span class="limited-text">{{address.detail??''}}, {{address.wardFullName??''}}, {{address.districtFullName??''}}, {{address.provinceFullName??''}}</span>
+            <span class="default ml-2" *ngIf="address.default">Mặc định</span>
+            <span class="take ml-2" *ngIf="address.default">Địa chỉ lấy hàng</span>
+          </div>
+        </div>
+        <div class="col-md-3" style="text-align: right;">
+          <span class="btn-link" (click)="openDialog(address, 'edit')">Cập nhật </span>
+        </div>
+        <div class="mt-1" style="color: #DADADA;"><hr></div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới"
+      (click)="openDialog(0, 'add')" [disabled]="totalData < 10 ? false : true">
+        <i class="fa fa-plus"></i>&nbsp;
+        <span>Thêm mới</span>
+      </button>
+    </div>
+</div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;"  (click)="onSubmit()"
+      data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Xác nhận</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

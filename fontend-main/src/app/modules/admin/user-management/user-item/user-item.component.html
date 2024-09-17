@@ -1,0 +1,265 @@
+<div class="container container-child">
+  <div class="row">
+    <div class="col-md-5" *ngIf="formType == 'add'">
+      <h1 class="header-title">Thêm mới người dùng</h1>
+    </div>
+    <div class="col-md-5" *ngIf="formType == 'detail'">
+      <h1 class="header-title">Xem chi tiết người dùng</h1>
+    </div>
+    <div class="col-md-5" *ngIf="formType == 'edit'">
+      <h1 class="header-title">Cập nhật người dùng</h1>
+    </div>
+    <div class="row">
+      <form action="#" [formGroup]="userFrm" class="form-horizontal">
+        <div class="form-body">
+          <fieldset>
+            <legend class="bold text-uppercase"><span>thông tin tài khoản</span></legend>
+            <div class="col-md-12">
+              <!-- Username Status-->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Tên đăng nhập</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="username" class="form-control" placeholder="Nhập tên đăng nhập">
+                    <small *ngIf="hasErrorInput('username', 'required')" class="p-error">
+                      <p>Tên đăng nhập không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('username', 'pattern')" class="p-error">
+                      <p>Độ dài tối thiểu là 5, không chứa ký tự đặc biệt</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6" *ngIf="formType != 'add'">
+                  <div class="form-group">
+                    <label class="control-label"><span>Trạng thái</span><span class="required"> * </span></label>
+                    <select class="form-control" formControlName="status">
+                      <option value="ACTIVE"><span>Hoạt động</span></option>
+                      <option value="INACTIVE"><span>Không hoạt động</span></option>
+                      <option value="DRAFT"><span>Draft</span></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- Password -->
+              <div class="row mb-2" *ngIf="formType == 'add'">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Mật khẩu</span><span class="required"> * </span></label>
+                    <input type="password" formControlName="password" class="form-control" placeholder="Nhập mật khẩu">
+                    <small *ngIf="hasErrorInput('password', 'required')" class="p-error">
+                      <p>Mật khẩu không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('password', 'pattern')" class="p-error">
+                      <p>Tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, số, kí tự đặc biệt</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Nhập lại mật khẩu</span><span class="required"> * </span></label>
+                    <input type="password" formControlName="confirmPassword" class="form-control" placeholder="Nhập lại mật khẩu">
+                    <small *ngIf="hasErrorInput('confirmPassword', 'required')" class="p-error">
+                      <p>Mật khẩu không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('confirmPassword', 'mustMatch')" class="p-error obligate">
+                      <p>Mật khẩu không khớp</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <!-- Role Rank -->
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Chức vụ</span><span class="required"> * </span></label>
+                    <select class="form-control" formControlName="roleId">
+                      <option value="01"><span>Người dùng</span></option>
+                      <option value="02"><span>Người giao hàng</span></option>
+                    </select>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Cấp bậc</span><span class="required"> * </span></label>
+                    <select class="form-control" formControlName="userRank">
+                      <option value="MEMBER"><span>Thành viên</span></option>
+                      <option value="PRIORITY"><span>Ưu tiên</span></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <br>
+          <br>
+          <fieldset>
+            <legend class="bold text-uppercase"><span>Thông tin người dùng</span></legend>
+            <div class="col-md-12">
+              <!-- Họ và tên -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Họ</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="familyName" class="form-control" placeholder="Nhập họ">
+                    <small *ngIf="hasErrorInput('familyName', 'required')" class="p-error">
+                      <p>Họ không để trống</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="givenName" class="form-control" placeholder="Nhập tên">
+                    <small *ngIf="hasErrorInput('givenName', 'required')" class="p-error">
+                      <p>Tên không để trống</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <!-- Email SĐT -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Email</span><span class="required"> * </span></label>
+                    <input type="email" formControlName="email" class="form-control" placeholder="Nhập email">
+                    <small *ngIf="hasErrorInput('email', 'required')" class="p-error">
+                      <p>Email không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('email', 'email')" class="p-error">
+                      <p>Vui lòng nhập đúng địng dạng</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số điện thoại</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="phone" class="form-control" placeholder="Nhập số điện thoại">
+                    <small *ngIf="hasErrorInput('phone', 'required')" class="p-error">
+                      <p>Số điện thoại không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('phone', 'pattern')" class="p-error">
+                      <p>Độ dài tối thiểu là 10, chỉ nhập số</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <!-- CCCD Giới tính -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số CMND/CCCD</span></label>
+                    <input type="text" formControlName="citizenNumber" class="form-control" placeholder="Nhập số CMND/CCCD">
+                    <small *ngIf="hasErrorInput('citizenNumber', 'pattern')" class="p-error">
+                      <p>Độ dài 9 hoặc 12 kí tự, chỉ nhập số</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giới tính</span></label>
+                    <select class="form-control" formControlName="gender">
+                      <option value="FEMALE"><span>Nữ</span></option>
+                      <option value="MALE"><span>Nam</span></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- DOB Country -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" style="padding-bottom: 0px;"><span>Ngày sinh</span></label>
+                    <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                      <input matInput class="form-control" matInput formControlName="dob" [matDatepicker]="picker" placeholder="Chọn ngày sinh">
+                      <span class="date-picker-icon">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      </span>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Quốc gia</span></label>
+                    <select class="form-control" formControlName="country">
+                      <option value="VN"><span>VietNam</span></option>
+                      <option value="EN"><span>England</span></option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <!-- Desc -->
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="description" class="control-label"><span>Mô tả</span></label>
+                    <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                      style="resize: vertical; max-height: 180px;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        <br>
+        <br>
+      </form>
+      <!-- <form [formGroup]="form">
+        <div formArrayName="address">
+          <div *ngFor="let control of addressArrayControls; let i = index" [formControlName]="i">
+            <input/>
+            <button type="button" (click)="removeControl(i)">Remove</button>
+          </div>
+          <button type="button" (click)="addControl()">Add Control</button>
+        </div>
+      </form> -->
+
+        <!-- <p-dropdown [options]="provinces$" [(ngModel)]="selectedCountry" optionLabel="name" [filter]="true" filterBy="name" [showClear]="true" placeholder="Chọn Thành phố/Tỉnh">
+          <ng-template pTemplate="selectedItem">
+              <div class="flex align-items-center gap-2" *ngIf="selectedCountry">
+                  <div>{{ selectedCountry.name }}</div>
+              </div>
+          </ng-template>
+          <ng-template let-country pTemplate="item">
+              <div class="flex align-items-center gap-2">
+                  <div>{{ country.name }}</div>
+              </div>
+          </ng-template>
+        </p-dropdown> -->
+
+      <br>
+      <br>
+      <div class="row" *ngIf="formType != 'detail'">
+        <div class="col-md-6 mb-2">
+          <div class="actions  0 float-end">
+            <button class="btn-back" data-toggle="tooltip" data-placement="top" title="Quay lại" (click)="back()">
+              <i class="fa-solid fa-arrow-left"></i>&nbsp;
+              <span>Quay lại</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2">
+          <div class="actions  0">
+            <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Lưu" (click)="onSubmit()">
+              <i class="fa-solid fa-check"></i>&nbsp;
+              <span>Lưu</span>
+            </button>
+          </div>
+        </div>
+       </div>
+       <div class="row" *ngIf="formType == 'detail'">
+        <div class="col-md-12 mb-2">
+          <div class="actions  0" style="text-align: center;">
+            <button class="btn-back" data-toggle="tooltip" data-placement="top" title="Quay lại" (click)="back()">
+              <i class="fa-solid fa-arrow-left"></i>&nbsp;
+              <span>Quay lại</span>
+            </button>
+          </div>
+        </div>
+       </div>
+    </div>
+  </div>
+</div>
+<pre>
+  {{userFrm.value| json}}
+</pre>

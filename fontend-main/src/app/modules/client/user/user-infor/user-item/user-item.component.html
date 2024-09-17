@@ -1,0 +1,225 @@
+<div class="container">
+  <div class="row mb-3">
+    <form action="#" [formGroup]="frm">
+      <div class="row">
+        <div class="col-lg-12" style="border-right: solid 1px #eee;">
+          <!-- Username UserRank -->
+          <div class="row mb-2">
+            <div class="col-lg-3 d-flex justify-content-center align-items-center">
+              <div class="row">
+                <img *ngIf="selectedFile || imageSrc" class="resizeImg ml-5" [src]="imageSrc" alt="">
+                <div class="d-flex justify-content-center align-items-center avatar-style ml-5" *ngIf="!selectedFile && !imageSrc">
+                  <img src="https://frontend.tikicdn.com/_desktop-next/static/img/account/avatar.png" style="width: 64px; height: 64px; padding: 0px">
+                </div>
+                <input type="file" (change)="onFileSelected($event)" style="margin-top: 10px; display: none;" #fileInput/>
+                <button class="btn-select-file mt-1" (click)="fileInput.click()">Chọn file</button>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Tài khoản</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text disabled" formControlName="username"/>
+                </div>
+              </div>
+              <div class="row align-items-center mt-3">
+                <div class="col-lg-3">
+                  <label class="mb-0">Cấp bậc</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text disabled" formControlName="userRank"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Email Phone -->
+          <div class="row mb-2">
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Email</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text" formControlName="email"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Số điện thoại</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text" formControlName="phone"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- FamilyName GivenName -->
+          <div class="row mb-2">
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Họ</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text" formControlName="familyName"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Tên</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text" formControlName="givenName"/>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- CitizenNumber Dob -->
+          <div class="row mb-2">
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">CCCD</label>
+                </div>
+                <div class="col-lg-9">
+                  <input type="text" class="form-control input-text" formControlName="citizenNumber"/>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Ngày sinh</label>
+                </div>
+                <div class="col-lg-9">
+                  <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                    <input matInput class="form-control" matInput formControlName="dob" [matDatepicker]="picker" placeholder="Chọn ngày sinh">
+                    <span class="date-picker-icon">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    </span>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Gender Descr -->
+          <div class="row mb-2">
+            <div class="col-lg-6">
+              <div class="row align-items-center">
+                <div class="col-lg-3">
+                  <label class="mb-0">Giới tính</label>
+                </div>
+                <div class="col-lg-9">
+                  <select class="form-control" formControlName="gender">
+                    <option value="FEMALE"><span>Nữ</span></option>
+                    <option value="MALE"><span>Nam</span></option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-6">
+              <div class="actions  0 float-end">
+                <button class="btn-sm btn-back" data-toggle="tooltip" data-placement="top" title="Quay lại" (click)="back()">
+                  <i class="fa-solid fa-arrow-left"></i>&nbsp;
+                  <span>Quay lại</span>
+                </button>
+                <button class="btn-sm btn-add ml-1" data-toggle="tooltip" data-placement="top" title="Lưu" (click)="onSubmit()">
+                  <i class="fa-solid fa-check"></i>&nbsp;
+                  <span>Lưu</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="col-lg-4">
+          <div class="row mb-4">
+            <div class="col-lg-12"><span class="title_lv1">Số điện thoại và email</span></div>
+          </div>
+
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="row d-flex align-items-center">
+                <div class="col-lg-1">
+                  <i class="fa-solid fa-phone"></i>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <span> Số điện thoại</span>
+                    <span> 0358785476  </span>
+                  </div>
+                </div>
+                <div class="col-lg-5 d-flex justify-content-end">
+                  <button class="update-btn" style="height: 29.6px;">Cập nhật</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4 mb-4">
+            <div class="col-lg-12">
+              <div class="row d-flex align-items-center">
+                <div class="col-lg-1">
+                  <i class="fa-solid fa-envelope"></i>
+                </div>
+                <div class="col-lg-6">
+                  <div class="row">
+                    <span> Địa chỉ email</span>
+                    <span> quynhnn@gmail.com  </span>
+                  </div>
+                </div>
+                <div class="col-lg-5 d-flex justify-content-end">
+                  <button class="update-btn" style="height: 29.6px;">Cập nhật</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row mt-4 mb-4">
+            <div class="col-lg-12"><span class="title_lv1">Bảo mật</span></div>
+          </div>
+
+          <div class="row mt-4 mb-4">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-7">
+                  <i class="fa-solid fa-lock"></i>
+                  <span style="padding: 0px 12px"> Đổi mật khẩu</span>
+                </div>
+                <div class="col-lg-5 d-flex justify-content-end">
+                  <button class="update-btn">Cập nhật</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div class="row mt-4 mb-4">
+            <div class="col-lg-12">
+              <div class="row">
+                <div class="col-lg-7">
+                  <i class="fa-solid fa-user-shield"></i>
+                  <span style="padding: 0px 12px"> Thiết lập mã PIN</span>
+                </div>
+                <div class="col-lg-5 d-flex justify-content-end">
+                  <button class="update-btn">Cập nhật</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div> -->
+      </div>
+    </form>
+  </div>
+</div>
+
+

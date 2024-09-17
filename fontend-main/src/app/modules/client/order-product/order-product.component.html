@@ -1,0 +1,170 @@
+<header id="header" class="header navbar">
+  <div class="header-wrapper">
+    <div class="header-top nav-dark">
+      <div class="flex-row container">
+        <div class="col-lg-12 col-md-12">
+          <a href=""><img class="resizeLogo" src=".\assets\logo\logo.png" alt=""></a>
+          <span class="ml-3 pay">Thanh toán</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="container">
+  <div class="row" style="margin-top: 15px;">
+    <div class="-p7ULT vtrWey"></div>
+      <div class="row py-4 px-4">
+        <div class="col-md-12 fs-6 FF4D2D mb-3">
+          <i class="fa-solid fa-location-dot mr-2"></i>
+          <span>Địa chỉ nhận hàng</span>
+        </div>
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-3 fs-16" *ngIf="address">
+              <div class="row" style="text-align: center;">
+                <span><strong>{{address.fullName??''}}</strong></span>
+                <span><strong>(+84) {{address.phone??''}}</strong></span>
+              </div>
+            </div>
+            <div class="col-md-7 fs-16" *ngIf="address">
+              <span>{{address.detail??''}}, {{address.wardFullName??''}}, {{address.districtFullName??''}}, {{address.provinceFullName??''}}</span>
+            </div>
+            <div class="col-md-10" *ngIf="!address">
+              <i>Không có dữ liệu</i>
+            </div>
+            <div class="col-md-2 fs-16">
+              <span class="default mr-3" *ngIf="address?.default">Mặc định</span>
+              <span class="btn-link" (click)="changeAddress(address?.id)">Thay đổi </span>
+            </div>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="row py-4 px-4">
+      <div class="col-md-12 mb-1">
+        <span class="fs-18">Sản phẩm</span>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <p-table [value]="product$">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Sản phẩm</th>
+                    <th></th>
+                    <th></th>
+                    <th style="text-align: center;">Đơn giá</th>
+                    <th style="text-align: center;">Số lượng</th>
+                    <th style="text-align: center;">Số tiền</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-product>
+                <tr>
+                    <td>
+                      <img src="{{product.valueDetails.image ? 'data:image/jpg;base64,' + product.valueDetails.image: 'data:image/jpg;base64,' + product.photo}}"
+                      alt="" class="w-10 shadow-2 resizeImg img-thumbnail"/>
+                    </td>
+
+                    <td>
+                      <span class="pointer">{{product.name}}</span>
+                    </td>
+
+                    <td>
+                      {{product.valueDetails.value}}
+                    </td>
+
+                    <td style="color: #ee4d2d; text-align: right;">
+                      {{product.valueDetails.sellPrice | currency:'VND'}}.000
+                    </td>
+
+                    <td style="text-align: right;">
+                      {{product.quantity}}
+                    </td>
+
+                    <td style="color: #ee4d2d; text-align: right;">
+                      {{product.quantity * product.valueDetails.sellPrice | currency:'VND'}}.000
+                    </td>
+                </tr>
+            </ng-template>
+          </p-table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="row py-4 px-4" style="background-color: #fafdff; border-bottom: 2px dotted #DADADA;">
+      <div class="col-md-1">
+        <span>Ghi chú: </span>
+      </div>
+      <div class="col-md-4" style="border-right: 2px dotted #DADADA;">
+        <input type="text" class="form-control" placeholder="Lưu ý cho người bán" [(ngModel)]="note">
+      </div>
+      <div class="col-md-7">
+        <div class="row">
+          <div class="col-md-3">
+            <span>Đơn vị vận chuyển: </span>
+          </div>
+          <div class="col-md-5">
+            <span><strong>{{delivery?.name}}</strong></span>
+          </div>
+          <div class="col-md-2">
+            <span class="btn-link">Thay đổi</span>
+          </div>
+          <div class="col-md-2" style="color: #ee4d2d;">
+            <span>{{delivery?.price | currency:'VND'}}.000</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row py-4 px-4" style="background-color: #fafdff; text-align: right;">
+      <div class="col-md-12 fs-18">
+        <span>Tổng số tiền ({{product$.length}} sản phẩm): </span>
+        <span><strong>{{totalPrice + delivery?.price | currency:'VND'}}.000</strong></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2">
+    <div class="row py-4 px-4" style="border-bottom: 2px dotted #DADADA;">
+      <div class="col-md-12">
+        <i class="fa-solid fa-ticket mr-1 fs-18" style="color: #ee4d2d;"></i>
+        <span class="fs-18">Voucher</span>
+        <div class="row ml-4" *ngIf="discountUser">
+          <div class="col-md-3 offset-md-1 imgstyle">
+            <img src="{{discountUser.image ? 'data:image/jpg;base64,' + discountUser.image : 'assets/discount.png'}}" alt="" class="w-10 shadow-2 resizeImg"/>
+          </div>
+          <div class="col-md-6 txtstyle">
+            <span class="fw-500 fs-17">Giảm {{discountUser.value}}%</span>
+            <div class="mt-2">
+              <span style="color: #969292;">{{discountUser.next ? 'HSD: ' + discountUser.endDate : 'Có hiệu lực từ' + discountUser.startDate}}</span>
+            </div>
+          </div>
+        </div>
+        <span class="btn-link float-end" (click)="selectDiscount()">Chọn voucher</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2" style="margin-bottom: 20px;">
+    <div class="row py-4 px-4" style="border-bottom: 2px dotted #DADADA;">
+      <div class="col-md-12">
+        <span class="fs-18 mr-2">Phương thức thanh toán</span>
+        <span class="{{isPayment ? 'default' : 'take'}} mr-2 fs-18" (click)="changePayment(1)">Paypal</span>
+        <span class="{{!isPayment ? 'default' : 'take'}} ml-2 fs-18" (click)="changePayment(2)">Thanh toán khi nhận hàng</span>
+      </div>
+    </div>
+    <div class="row py-4 px-4 fs-18" style="text-align: right; line-height: 2rem; border-bottom: 2px dotted #DADADA;">
+      <span>Tổng tiền hàng <span style="color: #ee4d2d;">{{totalPrice | currency:'VND'}}.000</span></span>
+      <span *ngIf="discountUser">Phí giảm giá <span style="color: #ee4d2d;">{{discountUser?.value}}%</span></span>
+      <span>Phí vận chuyển <span style="color: #ee4d2d;">{{delivery?.price | currency:'VND'}}.000</span></span>
+      <span>Tổng thanh toán <span style="color: #ee4d2d;">{{totalPrice - totalPrice*(discountUser?.value*0.01) + delivery?.price | currency:'VND'}}.000</span></span>
+    </div>
+    <div class="row py-4 px-4">
+      <div class="col-md-3 offset-md-9 float-end">
+        <button class="btn-buy-now px-6 py-2" (click)="buy()" data-toggle="tooltip" data-placement="top" title="Đặt hàng"><span>Đặt hàng</span></button>
+      </div>
+    </div>
+  </div>
+</div>

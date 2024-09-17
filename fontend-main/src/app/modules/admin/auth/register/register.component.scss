@@ -1,0 +1,202 @@
+//----------------------FRAME-----------------------------
+.div-lock {
+  background-image: url('/assets/logo/background.png');
+  background-repeat: no-repeat;
+  background-size: auto;
+  height: fit-content;
+  background-size: cover;
+  color: #ffffff;
+}
+.message {
+  color: red;
+  text-align: center;
+}
+.form-horizontal .form-group {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+.input-icon {
+  position: relative;
+  // left: 0;
+}
+.input-icon.right>i {
+  right: 8px;
+  float: right;
+}
+.input-icon > i {
+  color: #ccc;
+  display: block;
+  position: absolute;
+  margin: 12px 4px 4px 10px;
+  z-index: 3;
+  width: 16px;
+  font-size: 16px;
+  text-align: center;
+}
+.frmLogin label {
+  color: #224957;
+  font-weight: 500;
+}
+.frmLogin button {
+  padding: 12px;
+  background-color: #2A6864;
+  color: #ffffff;
+  width:100%;
+  font-weight: 500;
+  box-shadow: 0 3px 3px 1px #cbc9c9;
+  margin: 30px 0px 20px 20px;
+}
+.frmLogin a {
+  padding: 12px;
+  background-color: #2A6864;
+  color: #ffffff;
+  width:100%;
+  font-weight: 500;
+  box-shadow: 0 3px 3px 1px #cbc9c9;
+  margin: 10px 0px;
+}
+.frmLogin button:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  font-weight: 700;
+}
+.frmLogin a:hover {
+  box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.24), 0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  font-weight: 700;
+}
+::placeholder {
+  color: #DADADA;
+  opacity: 1;
+}
+.login-app :hover{
+  font-weight: 600;
+}
+input[type="checkbox"] {
+  accent-color: #2A6864;
+}
+
+
+/*-----------------------------------------*/
+.form-control {
+  font-weight: normal;
+  background-color: white;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px solid #222 !important;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border-radius: 10px;
+}
+.control-label{
+  padding-top: 20px;
+  padding-bottom: 5px;
+  margin-bottom: 0;
+  text-align: right;
+}
+.title-lv1{
+	color: #224957;
+	font-size: 40px;
+  padding-bottom: 50px;
+  line-height: 50px;
+  font-weight: 500 !important;
+}
+.text-style-input{
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.87);
+}
+body, html {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.page-body  {
+  position: relative;
+  min-height: 100vh;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: initial;
+  // height: 100vh;
+}
+
+
+//--------------------FRAME REGISTRATION----------------
+@media only screen and (max-width: 770px) and (min-width: 0px){
+  .centered-box-max-width {
+    max-width: 100% !important; /* Để làm cho khung không quá rộng trên màn hình lớn */
+  }
+}
+.centered-box {
+  // border: 2px solid #ccc;
+  padding: 20px;
+  max-height: 80%;
+  height: fit-content;
+  max-width: 80%; /* Để làm cho khung không quá rộng trên màn hình lớn */
+  width: 100%; /* Để làm cho khung responsive */
+  box-sizing: border-box;
+  background-color: white;
+  color: black;
+  margin:50px 0px;
+  border-radius: 10px;
+}
+.form-group-margin {
+  margin: 0px !important;
+}
+.success {
+  color: #24C77F;
+  font-size: 14px;
+}
+@media (max-width: 1200px) {
+  .page-footer img {
+      display: none;
+    }
+  }
+
+
+
+.input-group {
+  position: relative;
+  display: table;
+  border-collapse: separate;
+}
+.input-group.input-group-addon {
+  border-color: #e5e5e5;
+  background: #e5e5e5;
+  min-width: 39px;
+}
+.date-picker-container {
+  display: flex;
+  align-items: center;
+}
+
+.date-picker-icon {
+  cursor: pointer;
+  /* Thêm các kiểu khác như màu sắc hoặc hiệu ứng */
+}
+
+// button {
+// 	border-radius: 20px;
+// 	border: 1px solid #699479;
+// 	background-color: #88c49e;
+// 	color: #212529;
+// 	font-size: 12px;
+// 	font-weight: bold;
+// 	padding: 12px 45px;
+// 	letter-spacing: 1px;
+// 	text-transform: uppercase;
+// 	transition: transform 80ms ease-in;
+//   margin: 30px 0px 20px 20px;
+//   width: 100%;
+// }
+
+// button:active {
+// 	transform: scale(0.95);
+// }
+
+// button:focus {
+// 	outline: none;
+// }
+
+// button.ghost {
+// 	background-color: transparent;
+// 	border-color: #FFFFFF;
+// }

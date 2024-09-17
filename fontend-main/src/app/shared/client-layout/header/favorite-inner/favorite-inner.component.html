@@ -1,0 +1,33 @@
+<div class="col-md-3 p-0">
+  <p-overlayPanel #op [dismissable]="true" class="scrollbarY" [style]="{ 'z-index': 9999 }">
+    <ng-template pTemplate="content" style="z-index: 9999;">
+      <div class="bg-white p-2 rounded border mt-0" style="z-index: 9999;">
+        <div class="row m-0 p-0 empty-form" *ngIf="favorite$.length == 0">
+          <h5 class="mt-4 empty-text"><span>Không có sản phẩm</span></h5>
+        </div>
+
+        <div class="row rollable m-0 p-0" style="max-height: 450px">
+          <div class="slimScrollDiv">
+            <div mat-menu-item *ngFor="let item of favorite$ | paginate: { itemsPerPage: 3, currentPage: 1, totalItems: favorite$.length}" class="mg-item">
+              <div class="row">
+                <div class="col-md-3">
+                  <img src="{{'data:image/jpg;base64,' + item.photo}}" alt="" class="w-10 shadow-2 resizeImg img-thumbnail"/>
+                </div>
+                <div class="col-md-7" style="max-width: 200px;">
+                  <span class="fs-12" style="word-wrap: break-word;">{{item.name}}</span>
+                </div>
+                <div class="col-md-2">
+                  <span class="fs-12" style="color: #ee4d2d;" *ngIf="item.minPrice == item.maxPrice">{{item.minPrice.toFixed(0) | currency:'VND'}}.000</span>
+                  <span class="fs-12" style="color: #ee4d2d;" *ngIf="item.minPrice != item.maxPrice">{{item.minPrice.toFixed(0) | currency:'VND'}}.000 - {{item.maxPrice.toFixed(0) | currency:'VND'}}.000</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <label class="input-block-level form-control" (click)="routerFavorite()"><span>Xem thêm</span></label>
+        </div>
+      </div>
+    </ng-template>
+  </p-overlayPanel>
+</div>
+<i class="style-cart fa-solid fa-solid fa-heart" pBadge value={{favoriteService.favoriteTotal}}
+(click)="op.toggle($event)" data-toggle="tooltip" data-placement="top" title="Sản phẩm yêu thích"></i>

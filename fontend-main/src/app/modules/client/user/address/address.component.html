@@ -1,0 +1,50 @@
+<div class="container" *ngIf="address$.length > 0">
+  <div class="row">
+    <div class="col-md-3">
+      <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới" (click)="openDialog(0, 'add')" [disabled]="totalData < 10 ? false : true">
+        <i class="fa fa-plus"></i>&nbsp;
+        <span>Thêm mới</span>
+      </button>
+    </div>
+  </div>
+  <div class="row m-0 p-0 rollable" style="max-height: 550px;">
+    <div *ngFor="let item of address$">
+      <hr style="color: #DADADA;">
+      <div class="row">
+        <div class="col-md-6">
+          <span class="fw-500" style="border-right: 1px solid #969292;">{{item.fullName}} </span>
+          <span class="ml-1 fcolor"> (+84) {{item.phone}}</span>
+          <div class="row mt-2">
+            <span class="fcolor fs-13">{{item.detail}}</span>
+            <span class="fcolor fs-13">{{item.wardFullName}}, {{item.districtFullName}}, {{item.provinceFullName}}</span>
+            <span class="default ml-2" *ngIf="item.default">Mặc định</span>
+            <span class="take ml-2" *ngIf="item.default">Địa chỉ lấy hàng</span>
+            <span class="take ml-2">{{item.addressType == 'HOME' ? 'Nhà riêng' : 'Văn phòng'}}</span>
+          </div>
+        </div>
+        <div class="col-md-6" style="text-align: right;">
+          <span class="btn-link" style="border-right: 1px solid #969292;" (click)="openDialog(item, 'edit')">Cập nhật </span>
+          <span class="ml-1 btn-link" (click)="openDelete(item)"> Xóa</span>
+          <div class="row mt-4 float-end">
+            <span class="{{item.default ? 'setting-disabled' : 'setting-active'}} ml-2" (click)="changeDefault(item)">Thiết lập mặc định</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="address$.length == 0">
+  <div class="row">
+    <div class="col-md-3">
+      <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới">
+        <i class="fa fa-plus"></i>&nbsp;
+        <span>Thêm mới</span>
+      </button>
+    </div>
+  </div>
+  <hr style="color: #DADADA;">
+  <div class="row">
+    <i style="text-align: center;">Không có dữ liệu</i>
+  </div>
+</div>

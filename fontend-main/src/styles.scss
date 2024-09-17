@@ -1,0 +1,243 @@
+@import '~@fortawesome/fontawesome-free/css/all.css';
+/* Add application styles & imports to this file! */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html {
+  height: 100%;
+}
+
+body {
+  height: auto;
+  width: 100%;
+  margin: 0;
+  background-color: whitesmoke !important;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0s ease 0s;
+  font-family: Roboto, "Helvetica Neue", sans-serif !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 8px 0;
+}
+
+p {
+  margin: 0;
+}
+
+a, a:visited, a:hover {
+  color: #1976d2;
+  text-decoration: none !important;
+}
+
+a:hover {
+  color: #125699;
+}
+
+.spacer {
+  flex: 1
+}
+.badge-primary{
+  background-color:#428bca;
+  background-image: none;
+}
+
+.flash-sale-button{
+  color: #ee4d2d;
+  background: #ee4d2d!important;
+  border: 1px solid #ee4d2d !important;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s, box-shadow 0.2s;
+  border-radius: 3px;
+  height: 21px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+/* label style */
+.mat-tab-label{
+  background: green;
+  color:white;
+}
+/* focus style */
+.mat-tab-group.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-group.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-primary .mat-tab-label:not(.mat-tab-disabled):focus, .mat-tab-nav-bar.mat-primary .mat-tab-link:not(.mat-tab-disabled):focus{
+  background: red;
+}
+/* ink bar style */
+.mat-tab-group.mat-primary .mat-ink-bar, .mat-tab-nav-bar.mat-primary .mat-ink-bar{
+  background: yellow;
+  height: 10px;
+}
+
+
+.mat-menu-panel {
+  z-index: 1000; /* Đặt z-index mong muốn */
+}
+
+
+
+fieldset {
+  padding: 30px 20px 20px 20px !important;
+  /* margin: 0 0px!important; */
+  border: 1px solid green !important;
+  position: relative;
+  border-radius: 5px;
+}
+legend {
+  display: block;
+  padding: 0;
+  margin-bottom: 10px !important;
+  font-size: 16px !important;
+  line-height: inherit;
+  color: #40955F;
+  width: auto !important;
+  border-bottom: 0px;
+  position: absolute;
+  top: -10px;
+  background: #ffff;
+}
+.required {
+  color: red;
+}
+
+.p-error{
+  color: red;
+}
+
+.header-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 20px 0px 50px 0px;
+}
+button {
+	border-radius: 20px;
+	font-size: 14px;
+	// font-weight: bold;
+	padding: 8px 12px;
+	// letter-spacing: 1px;
+	// text-transform: uppercase;
+  margin: 0px 0px 10px 0px;
+	transition: transform 80ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+button:focus {
+	outline: none;
+}
+
+button.ghost {
+	background-color: transparent;
+	border-color: #FFFFFF;
+}
+tr {
+  font-size: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+
+/*---------------PAGINATION------------------*/
+.ngx-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+  padding-left: 0px;
+}
+
+.ngx-pagination li {
+  width: 35px;
+  height: 35px;
+  border-radius: 50% !important;
+  background: #f8f8f8;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+
+  &.small-screen {
+    display: none !important;
+  }
+
+  &.pagination-previous,
+  &.pagination-next {
+
+    a,
+    span {
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      overflow: hidden;
+      color: #f8f8f8;
+    }
+  }
+}
+
+.ngx-pagination .pagination-previous a:before,
+.ngx-pagination .pagination-previous.disabled:before,
+.ngx-pagination .pagination-next::before {
+  margin-right: 0px !important;
+  font-size: 26px;
+  margin-top: -8px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  // border: 1px solid red;
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  color: #2199e8;
+  left: 0;
+  pointer-events: none;
+  // top: 0px;
+}
+
+.ngx-pagination .pagination-next::before {
+  content: '\bb';
+}
+
+.ngx-pagination .pagination-next::after {
+  display: none !important;
+}
+
+.ngx-pagination .pagination-previous.disabled:before,
+.ngx-pagination .pagination-next.disabled:before {
+  opacity: 0.4;
+}
+
+.ngx-pagination .pagination-previous.disabled:hover {
+  background: #f8f8f8 !important;
+}
+
+.ngx-pagination a:hover,
+.ngx-pagination button:hover {
+  background: initial !important;
+}
+
+.btn-pagination {
+  color: #2199E8;
+  width: 35px;
+  height: 35px;
+  background: #f8f8f8;
+  border: none;
+  border-radius: 50%;
+}
+
+.btn-pagination:disabled {
+  color: #2199e85c;
+  cursor: default;
+}
+
+.btn-pagination i {
+  font-size: revert;
+}

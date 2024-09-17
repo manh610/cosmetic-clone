@@ -1,0 +1,57 @@
+<mat-tree [dataSource]="dataSource" [treeControl]="treeControl">
+  <mat-tree-node *matTreeNodeDef="let node" matTreeNodePadding [ngClass]="{'active': activeNode === node}" (click)="activeNode = node" (click)="nodeClickedHandler(node)">
+
+    <!-- Adding disabled property to button
+			so as to give padding to nodes -->
+    <button mat-icon-button disabled class="mat-icon-button">
+      <mat-icon *ngIf="!node.hasChild">minimize</mat-icon>
+      <mat-icon *ngIf="node.hasChild" class="mat-icon-rtl-mirror" (click)="nodeExpandHandler(treeControl.isExpanded(node),node)">
+        {{treeControl.isExpanded(node) ?
+        'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <span>{{node.name}}</span>
+    <!-- Split Button 1 -->
+    <mat-button-toggle-group class="mat-button-custom" *ngIf="hasPanel">
+      <mat-button-toggle class="split-button-1 drop-down-button" [matMenuTriggerFor]="dropdownMenuOne">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-menu #dropdownMenuOne="matMenu" xPosition="after">
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'add')"><i class="fa fa-plus"></i> Thêm danh mục</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'add-child')"><i class="fa fa-plus"></i> Thêm danh mục
+        con</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'edit')"><i class="fa fa-edit"></i> Cập nhật danh
+        mục</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'edit')"><i class="fa fa-trash text-danger"></i> Xoá danh
+        mục</button>
+    </mat-menu>
+  </mat-tree-node>
+
+  <!-- Tree node template for expandable nodes -->
+  <mat-tree-node *matTreeNodeDef="let node;when: hasChild" matTreeNodePadding [ngClass]="{'active': activeNode === node}" (click)="activeNode = node" (click)="nodeClickedHandler(node)">
+    <button mat-icon-button matTreeNodeToggle [attr.aria-label]="'Toggle ' + node.name" class="mat-icon-button">
+      <mat-icon class="mat-icon-rtl-mirror" (click)="nodeExpandHandler(treeControl.isExpanded(node),node)">
+        {{treeControl.isExpanded(node) ?
+        'expand_more' : 'chevron_right'}}
+      </mat-icon>
+    </button>
+    <span (click)="nodeClickedHandler(node)">{{node.name}}</span>
+    <!-- Split Button 1 -->
+    <mat-button-toggle-group class="mat-button-custom" *ngIf="hasPanel">
+      <mat-button-toggle class="split-button-1 drop-down-button" [matMenuTriggerFor]="dropdownMenuOne">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </mat-button-toggle>
+    </mat-button-toggle-group>
+    <mat-menu #dropdownMenuOne="matMenu" xPosition="after">
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'add')"><i class="fa fa-plus"></i> Thêm danh mục</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'add-child')"><i class="fa fa-plus"></i> Thêm danh mục
+        con</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'edit')"><i class="fa fa-edit"></i> Cập nhật danh
+        mục</button>
+      <button mat-menu-item class="btn" (click)="panelHandler(node,'delete')"><i class="fa fa-trash text-danger"></i> Xoá danh
+        mục</button>
+    </mat-menu>
+  </mat-tree-node>
+</mat-tree>
+

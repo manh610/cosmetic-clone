@@ -1,0 +1,14 @@
+<input matInput class="mat-select-search-input mat-select-search-hidden" />
+
+<div class="mat-select-search-inner" [ngClass]="{'mat-select-search-inner-multiple': matSelect.multiple}">
+  <input matInput class="mat-select-search-input mat-select-padding" #searchSelectInput (keydown)="_handleKeydown($event)"
+    (input)="onInputChange($event)" (blur)="onBlur($event)"
+    [placeholder]="placeholderLabel" />
+</div>
+<button mat-button *ngIf="value" mat-icon-button aria-label="Clear" (click)="_reset(true)"
+  class="mat-select-search-clear mat-button-style">
+  <mat-icon>close</mat-icon>
+</button>
+<div *ngIf="noEntriesFoundLabel && value && _options?.length === 0" class="mat-select-search-no-entries-found">
+  {{noEntriesFoundLabel}}
+</div>

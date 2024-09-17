@@ -1,0 +1,94 @@
+<header id="header" class="header navbar">
+  <div class="header-wrapper">
+    <div id="top-bar" class="header-top nav-dark">
+      <div class="flex-row container">
+        <div class="col-lg-6 col-md-6 align-items-center">
+        </div>
+
+        <div class="col-lg-6 col-md-6 d-flex justify-content-end align-items-center">
+          <label><i class="fa-solid fa-bell"></i> Thông báo</label>
+          <label><i class="fa-regular fa-circle-question"></i> Hỗ trợ</label>
+          <div class="dropdown" *ngIf="isLogin">
+            <a href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+              <label class="account-manager"><i class="fa-solid fa-circle-user"></i> {{user.username}}</label>
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="left: -100px;">
+              <li><a class="dropdown-item" (click)="routerProfile()"><i class="fa-regular fa-user"></i> Thông tin cá nhân</a></li>
+              <li><a class="dropdown-item" (click)="routerDiscount()"><i class="fa-regular fa-credit-card"></i> Ưu đãi của tôi</a></li>
+              <li><a class="dropdown-item" (click)="routerOrder()"><i class="fa-solid fa-truck-front"></i> Theo dõi đơn hàng</a></li>
+              <hr>
+              <li><a class="dropdown-item" (click)="logout()"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+
+
+<!-- <span class="header-softname">Hệ thống lưu trữ điện tử ngành Tài nguyên và Môi trường tỉnh Hà Giang</span>
+<div class="spacer"></div>
+
+<div class="top-menu">
+  <ul class="nav navbar-nav pull-right">
+    <li class="dropdown dropdown-extended dropdown-notification ms-lg-3" id="header_notification_bar">
+      <app-notification-inner></app-notification-inner>
+    </li>
+    <li class="dropdown dropdown-extended dropdown-notification ms-lg-1" id="header_flag">
+      <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"
+        aria-expanded="true" data-toggle="tooltip" data-placement="top" title="language">
+        <img class="w-20px h-20px rounded-1 ms-2" [src]="language.flag" alt="metronic" />
+      </a>
+      <ul class="dropdown-menu dropdown-menu-default">
+        <li *ngFor="let l of langs" class="menu-item cursor-pointer" >
+            <a class="menu-link d-flex " [ngClass]="l.lang === language.lang ? 'active' : ''">
+              <span class="symbol symbol-20px me-4">
+                <img class="rounded-1" [src]="l.flag" alt="metronic" />
+              </span>
+              {{ l.name }}
+            </a>
+        </li>
+      </ul>
+
+    </li>
+    <li class="dropdown dropdown-user ms-lg-3">
+      <div class="row user-header">
+        <div class="col-9"*ngIf="user">
+          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"
+            aria-expanded="false">
+            <span class="username username-hide-on-mobile" >{{user.username}}</span><br />
+          </a>
+          <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true"
+            aria-expanded="false">
+            <span class="username username-role username-hide-on-mobile bold" >{{user.positionName}}</span>
+          </a>
+        </div>
+        <div class="col-3 center">
+          <img alt="" class="img-circle" src="../../../../../assets/image/avatar3_small.jpg">
+        </div>
+      </div>
+      <ul class="dropdown-menu dropdown-menu-default">
+        <li>
+          <a href="#">
+            <i class="fa fa-user"></i> <span translate="AUTH.GENERAL.INFOR"></span></a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa fa-key"></i> <span translate="AUTH.GENERAL.CHANGE_PASS"></span> </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="fa-solid fa-user-shield"></i> Xác thực 2 bước
+          </a>
+        </li>
+        <li class="logout">
+          <a href="#">
+            <i class="fa fa-arrow-right-from-bracket"></i> <span translate="AUTH.LOGOUT.BUTTON"></span> </a>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</div> -->
+

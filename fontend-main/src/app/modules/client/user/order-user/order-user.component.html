@@ -1,0 +1,48 @@
+<div class="container">
+  <div class="col-md-5">
+    <div class="caption">
+      <span class="title-style" translate="HEADER.USER.TITLE_LV1"></span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-lg-12">
+    <mat-tab-group dynamicHeight [selectedIndex]="selectedTabIndex" (selectedIndexChange)="onTabChange($event)">
+      <mat-tab label="Tất cả">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Chờ xác nhận">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Chuẩn bị hàng">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Chờ giao hàng">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Đang giao">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Đã nhận">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+      <mat-tab label="Đã hủy">
+        <ng-template matTabContent>
+          <app-order-item (tabChangeRequested)="onTabChangeRequested($event)"></app-order-item>
+        </ng-template>
+      </mat-tab>
+    </mat-tab-group>
+    </div>
+  </div>
+</div>

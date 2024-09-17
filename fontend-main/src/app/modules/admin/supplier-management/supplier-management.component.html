@@ -1,0 +1,65 @@
+<div class="container container-child">
+  <div class="col-md-5">
+    <h1 class="header-title">Quản lý nhà cung cấp</h1>
+  </div>
+  <div class="row">
+      <div class="col-md-3">
+        <div class="actions  0">
+          <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới" (click)="openForm('0', 'add')">
+            <i class="fa fa-plus"></i>&nbsp;
+            <span>Thêm mới</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3 offset-md-3">
+          <div class="input-icon right">
+            <i class="fa-solid fa-caret-down"></i>
+            <select class="form-control" [(ngModel)]="status" (change)="initSupplier()" placeholder="Tìm kiếm theo trạng thái hoạt động">
+              <option value="">Trạng thái hoạt động</option>
+              <option value="ACTIVE">Hoạt động</option>
+              <option value="DELETED">Đã xóa</option>
+            </select>
+          </div>
+      </div>
+      <div class="col-md-3">
+        <div class="input-icon right">
+          <i class="fa fa-search" (click)="initSupplier()"></i>
+          <input type="text" [(ngModel)]="keyword" (keyup.enter)="initSupplier()"
+                class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <p-table
+    [value]="supplier$"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 20, 30, 1]"
+    >
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">STT</th>
+            <th style="width:15%">Ký hiệu</th>
+            <th style="width:25%">Tên</th>
+            <th style="width:15%">Email</th>
+            <th style="width:20%">Số điện thoại</th>
+            <th style="width:20%">Thao tác</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-supplier let-row let-i="rowIndex">
+        <tr>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">{{ i + 1 }}</td>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">{{ supplier.code }}</td>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">{{ supplier.name }}</td>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">{{ supplier.email }}</td>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">{{ supplier.phone }}</td>
+            <td [ngClass]="supplier.status == 'ACTIVE' ? 'active' : 'delete'">
+              <i class="fa-regular fa-pen-to-square mr-2" style="color: purple;" (click)="openForm(supplier, 'edit')"></i>
+              <i class="fa-solid fa-trash" style="color: #c63131;" (click)="openDelete(supplier)"></i>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+  </div>
+</div>

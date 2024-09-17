@@ -1,0 +1,52 @@
+<div class="container">
+  <br>
+  <br>
+  <br>
+
+  <!-- <div class="row mt-4">
+    <div class="col-lg-12 mt-3">
+      <label style="color: #ee4d2d; font-size: 15px;">Tìm kiếm hàng đầu</label>
+      <label class="float-end"><a routerLink="top-sales">Xem tất cả <i class="fa-solid fa-angle-right"></i></a> </label>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <app-top-sales-item></app-top-sales-item>
+    </div>
+  </div> -->
+
+  <div class="row mt-7 mb-3">
+    <div class="col-md-12 mt-3">
+      <label for="">DANH MỤC</label>
+    </div>
+    <div class="col-md-12 mt-3">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <app-treeview [nodeData]="treeData" (_clickedHandler) ="nodeClick($event)" (clickExpandHandler)="expandClick($event,$event)" ></app-treeview>
+          </div>
+        </div>
+        <div class="col-md-7">
+          <div class="row" style="background-color: #DADADA;">
+            <div class="col-md-12">
+              <label class="mr-2">Sắp xếp theo</label>
+              <button class="btn-sm mr-2 btn-filter">Phổ biến</button>
+              <button class="btn-sm mr-2 btn-filter">Mới nhất</button>
+              <button class="btn-sm mr-2 btn-filter">Bán chạy</button>
+            </div>
+          </div>
+        </div>
+        <!-- <div class="col-md-8">
+          <div class="row">
+            <div class="col-lg-12 mt-3 mb-3 text-center" style="border-bottom: solid 4px #ee4d2d;">
+              <label style="color: #ee4d2d; font-size: 20px; font-weight: 400; margin-bottom: 12px;">Gợi ý cho bạn</label>
+            </div>
+            <div class="col-lg-2" style="padding: 6px; background-color: whitesmoke !important;;" *ngFor="let product of recommendProducts">
+              <app-product-recommended-item [data]="product"></app-product-recommended-item>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </div>
+
+  </div>
+</div>
+

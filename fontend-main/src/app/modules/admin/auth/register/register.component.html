@@ -1,0 +1,169 @@
+<div class="div-lock frmLogin"  id="topOfPage">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="page-body col-12">
+        <div class="container">
+          <div class="centered-box centered-box-max-width">
+            <div class="col-lg-12">
+              <div class="float-end"><i class="fa-solid fa-circle-question" style="color: #969292"></i></div>
+              <div><i class="fa-solid fa-circle-left" style="color: #EE3880;" (click)="routerBack()"></i></div>
+            </div>
+            <div class="portlet-title">
+              <div class="title-lv1 text-center">
+                <span>Đăng ký tài khoản</span>
+              </div>
+            </div>
+
+            <div class="portlet-body form">
+              <form action="#"  [formGroup]="registerFrm" class="form-horizontal">
+                <div class="form-body">
+                  <fieldset>
+                    <legend class="bold text-uppercase"><span>thông tin cá nhân</span></legend>
+                    <div class="col-md-12">
+                      <!-- Họ và tên -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Họ</span><span class="required"> * </span></label>
+                            <input type="text" formControlName="familyName" class="form-control text-style-input" placeholder="Nhập họ">
+                            <small *ngIf="hasErrorInput('familyName', 'required')" class="p-error">
+                              <p>Họ không để trống</p>
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                            <input type="text" formControlName="givenName" class="form-control text-style-input" placeholder="Nhập tên">
+                            <small *ngIf="hasErrorInput('givenName', 'required')" class="p-error">
+                              <p>Tên không để trống</p>
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Email SĐT -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Email</span><span class="required"> * </span></label>
+                            <input type="email" formControlName="email" class="form-control text-style-input" placeholder="Nhập email">
+                            <small *ngIf="hasErrorInput('email', 'required')" class="p-error">
+                              <p>Email không để trống</p>
+                            </small>
+                            <small *ngIf="hasErrorInput('email', 'email')" class="p-error">
+                              <p>Vui lòng nhập đúng địng dạng</p>
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Số điện thoại</span><span class="required"> * </span></label>
+                            <input type="text" formControlName="phone" class="form-control text-style-input" placeholder="Nhập số điện thoại">
+                            <small *ngIf="hasErrorInput('phone', 'required')" class="p-error">
+                              <p>Số điện thoại không để trống</p>
+                            </small>
+                            <small *ngIf="hasErrorInput('phone', 'pattern')" class="p-error">
+                              <p>Độ dài tối thiểu là 10, chỉ nhập số</p>
+                            </small>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- CCCD Giới tính -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Số CMND/CCCD</span></label>
+                            <input type="text" formControlName="citizenNumber" class="form-control text-style-input" placeholder="Nhập số CMND/CCCD">
+                            <small *ngIf="hasErrorInput('citizenNumber', 'pattern')" class="p-error">
+                              <p>Độ dài tối thiểu là 9, chỉ nhập số</p>
+                            </small>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Giới tính</span></label>
+                            <select class="form-control text-style-input" formControlName="gender">
+                              <option value="FEMALE"><span>Nữ</span></option>
+                              <option value="MALE"><span>Nam</span></option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- DOB Country -->
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label" style="padding-bottom: 0px;"><span>Ngày sinh</span></label>
+                            <div class="date-picker-container form-group form-group-margin" data-date-format="dd-mm-yyyy">
+                              <input matInput class="form-control text-style-input" matInput formControlName="dob" [matDatepicker]="picker" placeholder="Chọn ngày sinh">
+                              <span class="date-picker-icon">
+                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                              </span>
+                              <mat-datepicker #picker></mat-datepicker>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Quốc gia</span></label>
+                            <select class="form-control text-style-input" formControlName="country">
+                              <option value="VN"><span>VietNam</span></option>
+                              <option value="EN"><span>England</span></option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                  <br>
+                  <br>
+                  <fieldset>
+                    <legend class="bold text-uppercase"><span>thông tin tài khoản</span></legend>
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Tên đăng nhập</span><span class="required"> * </span></label>
+                            <input type="text" formControlName="username" class="form-control text-style-input" placeholder="Nhập tên đăng nhập">
+                            <small *ngIf="hasErrorInput('username', 'required')" class="p-error">
+                              <p>Tên đăng nhập không để trống</p>
+                            </small>
+                            <small *ngIf="hasErrorInput('username', 'pattern')" class="p-error">
+                              <p>Độ dài tối thiểu là 5, không chứa ký tự đặc biệt</p>
+                            </small>
+                          </div>
+                        </div>
+                        <!-- <div class="col-md-6">
+                          <div class="form-group form-group-margin">
+                            <label class="control-label"><span>Mật khẩu</span><span class="required"> * </span></label>
+                            <input type="text" formControlName="password" class="form-control text-style-input" placeholder="Nhập tên đăng nhập">
+                            <small *ngIf="hasErrorInput('password', 'required')" class="p-error">
+                              <p>Tên đăng nhập không để trống</p>
+                            </small>
+                            <small *ngIf="hasErrorInput('password', 'pattern')" class="p-error">
+                              <p>Độ dài tối thiểu là 5, không chứa ký tự đặc biệt</p>
+                            </small>
+                          </div>
+                        </div> -->
+                      </div>
+                    </div>
+                  </fieldset>
+                  <div class="frmLogin">
+                    <div class="row" style="margin-top: 20px;">
+                      <div class="col-md-4 offset-md-4">
+                        <a (click)="onSubmit()" class="btn btn-sm">Đăng Ký</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- <pre>
+  {{registerFrm.value| json}}
+</pre> -->

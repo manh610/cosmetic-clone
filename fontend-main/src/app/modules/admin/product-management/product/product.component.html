@@ -1,0 +1,88 @@
+<div class="container container-child">
+  <div class="col-md-5">
+    <h1 class="header-title">Quản lý sản phẩm</h1>
+  </div>
+  <!-- Button Keyword -->
+  <div class="row">
+      <div class="col-md-6">
+        <div class="actions  0">
+          <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới" (click)="routerCreate()">
+            <i class="fa fa-plus"></i>&nbsp;
+            <span>Thêm mới</span>
+          </button>
+          <button class="btn-reload ml-2" data-toggle="tooltip" data-placement="top" title="Tải lại" (click)="reload()">
+            <i class="fa fa-refresh"></i>&nbsp;
+            <span>Tải lại</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3"></div>
+      <div class="col-md-3">
+        <div class="input-icon right">
+          <i class="fa fa-search" (click)="initProduct()"></i>
+          <input type="text" [(ngModel)]="keyword" (keyup.enter)="initProduct()"
+                class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+        </div>
+      </div>
+  </div>
+  <!-- Filter -->
+  <div class="row">
+    <div class="col-md-3">
+      <p-dropdown [options]="brand$" [(ngModel)]="brandId" [filter]="true" optionLabel="name" optionValue="id"
+                      [showClear]="true" placeholder="Lọc theo thương hiệu sản phẩm" (ngModelChange)="initProduct()"></p-dropdown>
+    </div>
+    <div class="col-md-3">
+      <p-dropdown [options]="skinType$" [(ngModel)]="skinTypeId" [filter]="true" optionLabel="name" optionValue="id"
+                      [showClear]="true" placeholder="Lọc theo loại da" (ngModelChange)="initProduct()"></p-dropdown>
+    </div>
+    <div class="col-md-3">
+      <p-dropdown [options]="category$" [(ngModel)]="categoryId" [filter]="true" optionLabel="name" optionValue="id"
+                      [showClear]="true" placeholder="Lọc theo danh mục" (ngModelChange)="initProduct()"></p-dropdown>
+    </div>
+    <div class="col-md-3">
+      <div class="input-icon right">
+        <i class="fa-solid fa-caret-down"></i>
+        <select class="form-control" [(ngModel)]="status" (change)="initProduct()" placeholder="Tìm kiếm theo trạng thái sản phẩm">
+          <option value="">Trạng thái sản phẩm</option>
+          <option value="STOCK">Còn hàng</option>
+          <option value="SOLD_OUT">Hết hàng</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <p-table
+    [value]="product$"
+    [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">STT</th>
+            <th style="width:13%">Ký hiệu</th>
+            <th style="width:20%">Tên</th>
+            <th style="width:15%">Danh mục</th>
+            <th style="width:12%">Thương hiệu</th>
+            <th style="width:10%">Trạng thái</th>
+            <th style="width:10%">Xuất xứ</th>
+            <th style="width:10%">Thao tác</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-product let-row let-i="rowIndex">
+        <tr>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ i + 1 }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.code }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.name }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.categoryName }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.brandName }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.status == 'STOCK'?'Còn hàng':'Hết hàng'}}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">{{ product.madeIn }}</td>
+            <td [ngClass]="product.status == 'STOCK' ? 'active' : 'delete'">
+              <i class="fa-regular fa-pen-to-square mr-2" style="color: purple;" (click)="routerUpdate(product.id)"></i>
+              <i class="fa-solid fa-trash" style="color: #c63131;" (click)="openDelete(product)"></i>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="0" [rows]="pageSizeP" [totalRecords]="totalItemP" [rowsPerPageOptions]="[10, 20, 30, 1]"></p-paginator>
+  </div>
+</div>

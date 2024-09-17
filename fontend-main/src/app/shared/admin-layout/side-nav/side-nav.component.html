@@ -1,0 +1,24 @@
+<mat-sidenav-container #sidenav class="sidenav-container mat-typography" autosize>
+  <mat-sidenav #drawer class="sidenav sidenav-left" fixedInViewport
+               [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+               [mode]="(isHandset$ | async) ? 'over' : 'side'"
+               [opened]="(isHandset$ | async) === false" >
+    <div class="align-items-center" style="height: 64px; background-color: #FD95AB;">
+      <a routerLink="/"><img class="resizeLogo" src=".\assets\logo\logo-admin.png" alt=""></a></div>
+    <mat-toolbar role="banner" class="banner-nav">
+      <button class="button-tool" mat-icon-button (click)="toggleSideNav()">
+        <mat-icon aria-label="Menu">menu</mat-icon>
+      </button>
+    </mat-toolbar>
+    <app-menu [dataOpened]="opened"></app-menu>
+
+  </mat-sidenav>
+  <mat-sidenav-content (scroll)="divScroll($event)">
+    <mat-toolbar role="banner">
+      <app-header class="mat-toolbar-single-row fixed-top" style="padding: 0px; align-items: normal;"></app-header>
+    </mat-toolbar>
+    <section id="main" class="ui" role="main">
+      <router-outlet></router-outlet>
+    </section>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,135 @@
+.container{
+  width: 100%;
+}
+.resizeImg {
+  width: 100px;
+  height: 100px;
+}
+::ng-deep {
+  .p-rating .p-rating-icon:first-child {
+    color: #ffc600;
+    width: 18px;
+  }
+  .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    font-size: 14px;
+    padding: 0px 10px;
+  }
+  .p-inputnumber-buttons-horizontal .p-inputnumber-input {
+    width: 50px;
+  }
+  .p-button.p-button-icon-only {
+    padding: 0px 0px 5px 0px !important;
+  }
+  .pi-minus:before {
+    font-size: 5px;
+  }
+  .pi-plus:before {
+    font-size: 5px;
+  }
+}
+::ng-deep {
+  .p-datatable .p-datatable-tbody > tr > td {
+    padding: 0.5rem 0.5rem;
+  }
+  .p-datatable .p-datatable-thead > tr > th {
+    padding: 0.5rem 0.5rem;
+  }
+}
+.sold-out {
+  background-color: #fafafa;
+  color: #969292;
+}
+.deleteMulti:hover, .deleteMulti:focus {
+  color: #ee3880;
+  cursor: pointer;
+}
+.btn-buy-now {
+  border: 1px solid #f15f7e;
+  color: #FFF;
+  background-color: #f15f7e;
+  font-size: 15px;
+}
+.pointer:hover, .pointer:focus {
+  cursor: pointer;
+}
+
+.header, .header-wrapper {
+  width: 100%;
+  z-index: 30;
+  position: relative;
+  background-size: cover;
+  background-position: 50% 0;
+  -webkit-transition: background-color .3s,opacity .3s;
+  -o-transition: background-color .3s,opacity .3s;
+  transition: background-color .3s,opacity .3s;
+  padding: 0;
+}
+article, aside, details, figcaption, figure, footer, header, main, menu, nav, section, summary {
+  display: block;
+}
+.header-bg-color, .header-wrapper {
+  background-color: #FDF3F5;
+}
+.header-top {
+  background-color: #FFF;
+  z-index: 11;
+  position: relative;
+  min-height: 85px;
+}
+.header-top, .header-bottom {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+.nav-dark {
+  color: #495057;
+  font-size: 15px;
+  box-shadow: 0px -3px 9px 0px #DADADA;
+  border-radius: 5px 5px 0px 0px;
+}
+.header .flex-row {
+  height: 100%;
+}
+// .full-width .ubermenu-nav, .container, .row {
+//   max-width: 1170px;
+// }
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+body, .container, .full-width .ubermenu-nav, .container-width, .row {
+  margin-left: auto;
+  margin-right: auto;
+}
+.flex-row {
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  flex-flow: row nowrap;
+  -webkit-box-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  justify-content: space-between;
+  width: 100%;
+}
+.flex-left {
+  margin-right: auto;
+}
+.flex-right {
+  margin-left: auto;
+}
+.flex-col {
+  max-height: 100%;
+}
+a {
+  text-decoration: none;
+  touch-action: manipulation;
+  background-color: transparent;
+}
+.header-main {
+  height: 83px;
+  z-index: 0;
+  position: relative;
+}

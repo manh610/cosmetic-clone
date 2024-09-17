@@ -1,0 +1,54 @@
+.resizeImg {
+  width: 80px;
+  height: 80px;
+}
+//ICON
+.input-icon {
+  position: relative;
+}
+.input-icon.right>i {
+  right: 8px;
+  float: right;
+}
+.input-icon > i {
+  color: #ccc;
+  display: block;
+  position: absolute;
+  margin: 12px 4px 4px 10px;
+  z-index: 3;
+  width: 16px;
+  font-size: 16px;
+  text-align: center;
+}
+.input-icon.right>.form-control {
+  padding-right: 33px;
+  padding-left: 12px;
+}
+.form-control {
+  font-size: 14px;
+  font-weight: normal;
+  color: #333;
+  background-color: #FFF;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px solid #222 !important;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border-radius: 20px;
+}
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+::placeholder {
+  color: #969292;
+}

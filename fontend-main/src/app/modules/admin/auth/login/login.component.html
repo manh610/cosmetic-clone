@@ -1,0 +1,47 @@
+<div class="container" id="container">
+  <div class="form-container sign-in-container">
+    <div class="form" [formGroup]="loginFrm">
+      <h1>Đăng nhập</h1>
+      <div class="social-container">
+        <a href="#" class="social"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="social"><i class="fab fa-google-plus-g"></i></a>
+        <a href="#" class="social"><i class="fab fa-linkedin-in"></i></a>
+      </div>
+      <span>hoặc sử dụng tài khoản</span>
+      <div>
+        <input type="text" class="form-control" formControlName="username" placeholder="Username" />
+        <small *ngIf="hasErrorInput('username', 'required')" class="p-error">
+          <p>Tên đăng nhập không để trống</p>
+        </small>
+      </div>
+
+      <div class="input-icon right">
+        <i class="{{ passwordVisible ? 'fa-solid fa-eye' : 'fa-solid fa-eye-slash' }}" (click)="passwordVisibility()"></i>
+        <input type="{{ passwordVisible ? 'text' : 'password' }}" class="form-control"
+          formControlName="password" placeholder="Password">
+          <small *ngIf="hasErrorInput('password', 'required')" class="p-error">
+            <p>Mật khẩu không để trống</p>
+          </small>
+      </div>
+      <div class="row justify-content-end">
+        <div class="col-lg-3">
+          <a class="pull-right btn-link" (click)="routerForgotPassword()" style="width: 120px;">Quên mật khẩu?</a>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <button style="width: 240px;" (click)="onSubmit()" data-toggle="tooltip" data-placement="top" title="Đăng nhập">Đăng nhập</button>
+        </div>
+      </div>
+      <div class="row justify-content-end mt-3">
+        <div class="col-lg-12">
+          <span class="">Thành viên mới? <a (click)="routerRegister()" class="btn-link">Đăng ký</a></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="overlay-container">
+    <img class="overlay" src="assets/logo/logo-login.png">
+      <img src="" alt="">
+    </div>
+  </div>

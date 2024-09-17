@@ -1,0 +1,680 @@
+<div class="container container-child">
+  <div class="row">
+    <!-- TITLE -->
+    <div class="col-md-5" *ngIf="formType == 'add'">
+      <h1 class="header-title">Thêm mới sản phẩm</h1>
+    </div>
+    <div class="col-md-5" *ngIf="formType == 'edit'">
+      <h1 class="header-title">Cập nhật sản phẩm</h1>
+    </div>
+
+
+    <div class="row">
+      <!-- Product -->
+      <form action="#" id="form_group" [formGroup]="productFrm" class="form-horizontal">
+        <div class="form-body">
+          <fieldset>
+            <legend class="bold text-uppercase"><span>Thông tin sản phẩm</span></legend>
+            <div class="col-md-12">
+              <!-- Code Name -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Ký hiệu</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="code" class="form-control" placeholder="Nhập ký hiệu">
+                    <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                      <p>Ký hiệu không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInput('code', 'pattern')" class="p-error">
+                      <p>Độ dài tối thiểu là 3, không chứa ký tự đặc biệt</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="name" class="form-control" placeholder="Nhập tên">
+                    <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                      <p>Ký hiệu không để trống</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <!-- Brand Category -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Thương hiệu sản phẩm</span><span class="required"> * </span></label>
+                      <p>
+                      <p-dropdown [options]="brand$" formControlName="brandId" [filter]="true" [showClear]="true" optionLabel="name" optionValue="id"
+                            placeholder="Chọn thương hiệu sản phẩm">
+                      </p-dropdown>
+                      <small *ngIf="hasErrorInput('brandId', 'required')" class="p-error">
+                        <p>Thương hiệu không để trống</p>
+                      </small>
+                      </p>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Danh mục sản phẩm</span><span class="required"> * </span></label>
+                      <p>
+                      <p-dropdown [options]="category$" formControlName="categoryId" [filter]="true" [showClear]="true" optionLabel="name" optionValue="id"
+                            placeholder="Chọn danh mục sản phẩm">
+                      </p-dropdown>
+                      <small *ngIf="hasErrorInput('categoryId', 'required')" class="p-error">
+                        <p>Danh mục sản phẩm không để trống</p>
+                      </small>
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <!-- DATE -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" style="padding-bottom: 0px;"><span>Ngày sản xuất</span><span class="required"> * </span></label>
+                    <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                      <input matInput class="form-control" matInput formControlName="productionDate" [matDatepicker]="picker" placeholder="Chọn ngày sản xuất">
+                      <span class="date-picker-icon">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      </span>
+                      <mat-datepicker #picker></mat-datepicker>
+                      <small *ngIf="hasErrorInput('productionDate', 'required')" class="p-error">
+                        <p>Ngày sản xuất không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label" style="padding-bottom: 0px;"><span>Hạn sử dụng</span><span class="required"> * </span></label>
+                    <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                      <input matInput1 class="form-control" matInput1 formControlName="expirationDate" [matDatepicker]="picker1" placeholder="Chọn hạn sử dụng">
+                      <span class="date-picker-icon">
+                        <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                      </span>
+                      <mat-datepicker #picker1></mat-datepicker>
+                      <small *ngIf="hasErrorInput('expirationDate', 'required')" class="p-error">
+                        <p>Hạn sử dụng không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- Status Madein -->
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                        <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                        <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                        <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                      </select>
+                      <small *ngIf="hasErrorInput('status', 'required')" class="p-error">
+                        <p>Trạng thái sản phẩm không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Xuất xứ</span><span class="required"> * </span></label>
+                    <input type="text" formControlName="madeIn" class="form-control" placeholder="Nhập xuất xứ">
+                    <small *ngIf="hasErrorInput('madeIn', 'required')" class="p-error">
+                      <p>Xuất xứ không để trống</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <!-- Skin Type -->
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label class="control-label"><span>Loại da phù hợp</span><span class="required"> * </span></label>
+                      <p>
+                      <p-multiSelect [options]="skinType$" formControlName="skinTypeId" placeholder="Chọn các loại da"
+                            optionLabel="name" display="chip" [showClear]="true" optionValue="id">
+                      </p-multiSelect>
+                      <small *ngIf="hasErrorInput('skinTypeId', 'required')" class="p-error">
+                        <p>Loại da không để trống</p>
+                      </small>
+                      </p>
+                  </div>
+                </div>
+              </div>
+              <!-- Photo -->
+              <div class="row mb-2">
+                <div class="col-md-12">
+                  <div>
+                    <input type="file" (change)="onFileSelected($event)" style="margin-top: 10px;"/>
+                  </div>
+                  <br>
+                  <img *ngIf="selectedFile || imageSrcPr" class="resizeImg img-thumbnail" [src]="imageSrcPr" alt="">
+                </div>
+              </div>
+              <!-- Image -->
+              <div class="row mb-2">
+                <p-fileUpload name="demo[]" (onSelect)="onAddImage($event)" (onRemove)="onRemoveImage($event)" [multiple]="true" accept="image/*">
+                  <ng-template pTemplate="content">
+                      <ul *ngIf="uploadedFiles.length">
+                          <li *ngFor="let file of uploadedFiles">{{ file.name }} - {{ file.size }} bytes</li>
+                      </ul>
+                  </ng-template>
+                </p-fileUpload>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-2 image-container" *ngFor="let img of imageByte">
+                  <img class="resizeImg img-thumbnail" [src]="'data:image/jpg;base64,'+img.data" alt="">
+                  <button class="cancel-button" (click)="removeImage(img)" data-toggle="tooltip" data-placement="top" title="Xóa ảnh">
+                    <i class="fa-solid fa-xmark"></i></button>
+                </div>
+              </div>
+              <!-- Description -->
+              <div class="row mt-2">
+                <div class="col-md-12">
+                  <label for="description" class="control-label"><span>Mô tả</span></label>
+                  <div class="editor">
+                    <ngx-editor-menu [editor]="editorDesc" [toolbar]="toolbar">
+                    </ngx-editor-menu>
+                    <ngx-editor placeholder="...."
+                      [editor]="editorDesc" formControlName="description">
+                    </ngx-editor>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+          <pre>
+          </pre>
+        </div>
+      </form>
+      <div class="row" *ngIf="formType== 'add'">
+        <div class="col-md-12">
+          <mat-checkbox (change)='onCheckBoxChange($event)'>Biến thể sản phẩm</mat-checkbox>
+        </div>
+      </div>
+      <form *ngIf="!isVariant && formType== 'add'" action="#" [formGroup]="variantFrm" class="form-horizontal mt-4">
+        <div class="form-body">
+          <fieldset>
+            <legend class="bold text-uppercase"><span>Thông tin chi tiết sản phẩm</span></legend>
+            <div class="col-md-12">
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá nhập</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá gốc" class="form-control" formControlName="importPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputVariant('importPrice', 'required')" class="p-error">
+                      <p>Giá gốc không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('importPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá bán</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá bán" class="form-control" formControlName="sellPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputVariant('sellPrice', 'required')" class="p-error">
+                      <p>Giá bán không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('sellPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng nhập</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="importQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputVariant('importQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('importQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng bán</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="sellQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputVariant('sellQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('sellQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Đơn vị đo</span></label>
+                    <input type="text" formControlName="unit" class="form-control" placeholder="Nhập đơn vị đo">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                        <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                        <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                        <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                      </select>
+                      <small *ngIf="hasErrorInputVariant('status', 'required')" class="p-error">
+                        <p>Trạng thái sản phẩm không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="description" class="control-label"><span>Mô tả</span></label>
+                    <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                      style="resize: vertical; max-height: 180px;"></textarea>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+      </form>
+      <form *ngIf="isVariant && formType== 'add'" action="#" [formGroup]="dynamicFrm" class="form-horizontal mt-4">
+        <div class="form-body" formArrayName="dynamicVariant">
+          <fieldset>
+            <legend class="bold text-uppercase"><span>Thông tin biến thể</span></legend>
+            <div class="col-md-12" *ngFor="let v of dynamicVariant().controls; let i = index" [formGroupName]="i">
+              <div class="row mb-2">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Tên biến thể</span></label>
+                    <input type="text" formControlName="value" class="form-control" placeholder="Nhập tên biến thể">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Đơn vị đo</span></label>
+                    <input type="text" formControlName="unit" class="form-control" placeholder="Nhập đơn vị đo">
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <button (click)="removeDynamicVariant(i)" class="float-end btn-remove mt-3" data-toggle="tooltip" data-placement="top" title="Xóa biến thể"
+                  ><i class="fa-solid fa-xmark"></i></button>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng nhập</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="importQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputDynamicVariant('importQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputDynamicVariant('importQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng bán</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="sellQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputDynamicVariant('sellQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputDynamicVariant('sellQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá nhập</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá gốc" class="form-control" formControlName="importPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputDynamicVariant('importPrice', 'required')" class="p-error">
+                      <p>Giá gốc không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputDynamicVariant('importPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá bán</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá bán" class="form-control" formControlName="sellPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputDynamicVariant('sellPrice', 'required')" class="p-error">
+                      <p>Giá bán không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputDynamicVariant('sellPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="form-group">
+                    <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                        <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                        <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                        <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                      </select>
+                      <small *ngIf="hasErrorInputDynamicVariant('status', 'required')" class="p-error">
+                        <p>Trạng thái sản phẩm không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <hr style="color: #DADADA;">
+            </div>
+            <p-button class="mt-2" data-toggle="tooltip" data-placement="top" title="Thêm biến thể" (click)="addDynamicVariant()">
+              <i class="fa-solid fa-plus"></i></p-button>
+          </fieldset>
+        </div>
+      </form>
+
+      <fieldset class="ml-3" *ngIf="formType == 'edit'">
+        <legend class="bold text-uppercase"><span>Thông tin chi tiết sản phẩm</span></legend>
+        <div class="row mt-2">
+          <p-table
+          [value]="variant$"
+          [tableStyle]="{ 'min-width': '50rem' }">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th style="width:5%">STT</th>
+                  <th style="width:15%">Tên biến thể</th>
+                  <th style="width:15%">Giá nhập</th>
+                  <th style="width:15%">Giá bán</th>
+                  <th style="width:10%">Số lượng nhập</th>
+                  <th style="width:10%">Số lượng bán</th>
+                  <th style="width:10%">Đơn vị đo</th>
+                  <th style="width:10%">Trạng thái</th>
+                  <th style="width:10%">Thao tác</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-v let-row let-i="rowIndex">
+              <tr>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ i + 1 }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.value }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.importPrice | currency:'VND' }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.sellPrice | currency:'VND' }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.importQuantity }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.sellQuantity }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.unit }}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">{{ v.status == 'STOCK'?'Còn hàng':'Hết hàng'}}</td>
+                  <td [ngClass]="v.status == 'STOCK' ? 'active' : 'delete'">
+                    <i class="fa-regular fa-pen-to-square mr-2" style="color: purple;" (click)="dialogValue(v.id)"></i>
+                    <!-- <i class="fa-solid fa-trash" style="color: #c63131;"></i> -->
+                  </td>
+              </tr>
+          </ng-template>
+          </p-table>
+        </div>
+      </fieldset>
+
+      <!-- <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin chi tiết sản phẩm</span></legend>
+        <div class="row">
+          <div class="col-md-12">
+            <mat-checkbox (change)='onCheckBoxChange($event)'>Biến thể sản phẩm</mat-checkbox>
+          </div>
+        </div>
+        <div *ngIf="!isVariant">
+          <form action="#" [formGroup]="variantFrm" class="form-horizontal mt-4">
+             <div class="form-body">
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá nhập</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá gốc" class="form-control" formControlName="importPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputVariant('importPrice', 'required')" class="p-error">
+                      <p>Giá gốc không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('importPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Giá bán</span><span class="required"> * </span></label>
+                    <div class="p-inputgroup">
+                      <span class="p-inputgroup-addon">VND</span>
+                      <input type="number" min="0" pInputText placeholder="Nhập giá bán" class="form-control" formControlName="sellPrice" style="border-radius: 0;"/>
+                      <span class="p-inputgroup-addon">.000</span>
+                    </div>
+                    <small *ngIf="hasErrorInputVariant('sellPrice', 'required')" class="p-error">
+                      <p>Giá bán không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('sellPrice', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng nhập</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="importQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputVariant('importQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('importQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Số lượng bán</span><span class="required"> * </span></label>
+                    <input type="number" min="0" formControlName="sellQuantity" class="form-control" placeholder="Nhập số lượng">
+                    <small *ngIf="hasErrorInputVariant('sellQuantity', 'required')" class="p-error">
+                      <p>Số lượng không để trống</p>
+                    </small>
+                    <small *ngIf="hasErrorInputVariant('sellQuantity', 'pattern')" class="p-error">
+                      <p>Nhập số dương</p>
+                    </small>
+                  </div>
+                </div>
+              </div>
+              <div class="row mb-2">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Đơn vị đo</span></label>
+                    <input type="text" formControlName="unit" class="form-control" placeholder="Nhập đơn vị đo">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                    <div class="input-icon right">
+                      <i class="fa-solid fa-caret-down"></i>
+                      <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                        <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                        <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                        <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                      </select>
+                      <small *ngIf="hasErrorInputVariant('status', 'required')" class="p-error">
+                        <p>Trạng thái sản phẩm không để trống</p>
+                      </small>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="form-group">
+                    <label for="description" class="control-label"><span>Mô tả</span></label>
+                    <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                      style="resize: vertical; max-height: 180px;"></textarea>
+                  </div>
+                </div>
+              </div>
+             </div>
+          </form>
+        </div>
+        <div *ngIf="isVariant">
+          <form action="#" [formGroup]="dynamicFrm" class="form-horizontal mt-4">
+            <div class="form-body" formArrayName="dynamicVariant">
+              <div *ngFor="let v of dynamicVariant().controls; let i = index" [formGroupName]="i">
+                <div class="row mb-2">
+                  <div class="col-md-6">
+                    <div class="form-group">
+                      <label class="control-label"><span>Tên biến thể</span></label>
+                      <input type="text" formControlName="value" class="form-control" placeholder="Nhập tên biến thể">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Số lượng nhập</span><span class="required"> * </span></label>
+                      <input type="number" min="0" formControlName="importQuantity" class="form-control" placeholder="Nhập số lượng">
+                      <small *ngIf="hasErrorInputDynamicVariant('importQuantity', 'required')" class="p-error">
+                        <p>Số lượng không để trống</p>
+                      </small>
+                      <small *ngIf="hasErrorInputDynamicVariant('importQuantity', 'pattern')" class="p-error">
+                        <p>Nhập số dương</p>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Số lượng bán</span><span class="required"> * </span></label>
+                      <input type="number" min="0" formControlName="sellQuantity" class="form-control" placeholder="Nhập số lượng">
+                      <small *ngIf="hasErrorInputDynamicVariant('sellQuantity', 'required')" class="p-error">
+                        <p>Số lượng không để trống</p>
+                      </small>
+                      <small *ngIf="hasErrorInputDynamicVariant('sellQuantity', 'pattern')" class="p-error">
+                        <p>Nhập số dương</p>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Đơn vị đo</span></label>
+                      <input type="text" formControlName="unit" class="form-control" placeholder="Nhập đơn vị đo">
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Giá nhập</span><span class="required"> * </span></label>
+                      <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">VND</span>
+                        <input type="number" min="0" pInputText placeholder="Nhập giá gốc" class="form-control" formControlName="importPrice" style="border-radius: 0;"/>
+                        <span class="p-inputgroup-addon">.000</span>
+                      </div>
+                      <small *ngIf="hasErrorInputDynamicVariant('importPrice', 'required')" class="p-error">
+                        <p>Giá gốc không để trống</p>
+                      </small>
+                      <small *ngIf="hasErrorInputDynamicVariant('importPrice', 'pattern')" class="p-error">
+                        <p>Nhập số dương</p>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Giá bán</span><span class="required"> * </span></label>
+                      <div class="p-inputgroup">
+                        <span class="p-inputgroup-addon">VND</span>
+                        <input type="number" min="0" pInputText placeholder="Nhập giá bán" class="form-control" formControlName="sellPrice" style="border-radius: 0;"/>
+                        <span class="p-inputgroup-addon">.000</span>
+                      </div>
+                      <small *ngIf="hasErrorInputDynamicVariant('sellPrice', 'required')" class="p-error">
+                        <p>Giá bán không để trống</p>
+                      </small>
+                      <small *ngIf="hasErrorInputDynamicVariant('sellPrice', 'pattern')" class="p-error">
+                        <p>Nhập số dương</p>
+                      </small>
+                    </div>
+                  </div>
+                  <div class="col-md-4">
+                    <div class="form-group">
+                      <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                      <div class="input-icon right">
+                        <i class="fa-solid fa-caret-down"></i>
+                        <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                          <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                          <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                          <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                        </select>
+                        <small *ngIf="hasErrorInputDynamicVariant('status', 'required')" class="p-error">
+                          <p>Trạng thái sản phẩm không để trống</p>
+                        </small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <button (click)="removeDynamicVariant(i)">Remove</button>
+              </div>
+            </div>
+            <p-button class="mr-2" data-toggle="tooltip" data-placement="top" title="Thêm biến thể" (click)="addDynamicVariant()">
+              <i class="fa-solid fa-plus"></i></p-button>
+          </form>
+        </div>
+      </fieldset> -->
+      <div class="row mt-5">
+        <div class="col-md-6 mb-2">
+          <div class="actions float-end">
+            <button class="btn-back" data-toggle="tooltip" data-placement="top" title="Quay lại" (click)="back()">
+              <i class="fa-solid fa-arrow-left"></i>&nbsp;
+              <span>Quay lại</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-6 mb-2">
+          <div class="actions">
+            <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Lưu" (click)="onSubmit()">
+              <i class="fa-solid fa-check"></i>&nbsp;
+              <span>Lưu</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<pre>
+  {{ productFrm.value | json }}
+</pre>

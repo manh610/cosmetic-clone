@@ -1,0 +1,26 @@
+<mat-nav-list>
+    <app-menu-item [data]="dataOpened" class="app-nav-menu-list" *ngFor="let item of menu" [item]="item"></app-menu-item>
+</mat-nav-list>
+
+
+
+
+<!--
+<div style="width: fit-content;">
+  <nav [ngClass]="isExpand==true ? 'menu' : ''">
+    <button (click)="expandMenu()" class="navbar-toggler" type="button">
+      <span *ngIf="!isExpand">
+        <i class="fa-solid fa-bars menu-icon"></i>
+      </span>
+      <span *ngIf="isExpand">
+        <i class="fa-solid fa-bars menu-icon-expand"></i>
+      </span>
+    </button>
+  </nav>
+  <div *ngIf="isExpand">
+    <div class="menu p-4">
+      <h4>Quản lý người dùng</h4>
+      <h4>Quản lý sản phẩm</h4>
+    </div>
+  </div>
+</div> -->

@@ -1,0 +1,128 @@
+<div class="container container-child">
+  <div class="col-md-5">
+    <h1 class="header-title">Quản lý người dùng</h1>
+  </div>
+  <div class="row">
+      <div class="col-md-6">
+        <div class="actions">
+          <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới" (click)="routerCreate()">
+            <i class="fa fa-plus"></i>&nbsp;
+            <span>Thêm mới</span>
+          </button>
+          <button class="btn-reload ml-2" data-toggle="tooltip" data-placement="top" title="Tải lại" (click)="reload()">
+            <i class="fa fa-refresh"></i>&nbsp;
+            <span>Tải lại</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-3 offset-md-3">
+        <div class="input-icon right">
+          <i class="fa fa-search" (click)="initUser()"></i>
+          <input type="text" [(ngModel)]="keyword" (keyup.enter)="initUser()"
+                class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <div class="input-icon right">
+        <i class="fa-solid fa-caret-down"></i>
+        <select class="form-control" [(ngModel)]="status" (change)="initUser()" placeholder="Tìm kiếm theo trạng thái hoạt động">
+          <option value="">Trạng thái hoạt động</option>
+          <option value="ACTIVE">Hoạt động</option>
+          <option value="BLOCK">Đã khóa</option>
+          <option value="DELETED">Đã xóa</option>
+          <option value="DRAFT">Không hợp lệ</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="input-icon right">
+        <i class="fa-solid fa-caret-down"></i>
+        <select class="form-control" [(ngModel)]="roleId" (change)="initUser()" placeholder="Tìm kiếm theo chức vụ">
+          <option value="">Tất cả chức vụ</option>
+          <option value="01">Người dùng</option>
+          <option value="02">Người giao hàng</option>
+        </select>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="input-icon right">
+        <i class="fa-solid fa-caret-down"></i>
+        <select class="form-control" [(ngModel)]="userRank" (change)="initUser()" placeholder="Tìm kiếm theo cấp bậc">
+          <option value="">Tất cả cấp bậc</option>
+          <option value="PRIORITY">Tài khoản ưu tiên</option>
+          <option value="MEMBER">Thành viên</option>
+          <option value="SILVER">Cấp bạc</option>
+          <option value="GOLD">Cấp vàng</option>
+          <option value="DIAMONDS">Cấp kim cương</option>
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="row mt-2">
+    <p-table
+    [value]="user$"
+    [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">STT</th>
+            <th style="width:13%">Tài khoản</th>
+            <th style="width:15%">Họ và tên</th>
+            <th style="width:10%">Cấp bậc</th>
+            <th style="width:15%">Email</th>
+            <th style="width:13%">Số điện thọai</th>
+            <th style="width:13%">Trạng thái</th>
+            <th style="width:26%">Thao tác</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-user let-row let-i="rowIndex">
+        <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.familyName }} {{user.givenName}}</td>
+            <td>{{ user.userRank }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.phone }}</td>
+            <td *ngIf="user.status == 'ACTIVE'">
+              <span class="status" style="background-color: rgb(133, 215, 133); color: rgb(11, 109, 6);">{{ user.status }}</span>
+            </td>
+            <td *ngIf="user.status == 'BLOCK'">
+              <span class="status" style="background-color: rgb(133, 166, 215); color: rgb(6, 20, 109);">{{ user.status }}</span>
+            </td>
+            <td *ngIf="user.status == 'DELETED'">
+              <span class="status" style="background-color: rgb(215, 133, 133); color: rgb(109, 21, 6);">{{ user.status }}</span>
+            </td>
+            <td *ngIf="user.status == 'DRAFT'">
+              <span class="status" style="background-color: rgb(156, 154, 154); color: rgb(57, 57, 57);">{{ user.status }}</span>
+            </td>
+            <td>
+              <i class="fa-solid fa-lock mr-2" (click)="openBlock(user)"></i>
+              <i class="fa-solid fa-lock-open mr-2" style="color: green;" (click)="openRecover(user)"></i>
+              <i class="fa-regular fa-eye mr-2" (click)="routerDetail(user.id)"></i>
+              <i class="fa-regular fa-pen-to-square mr-2" style="color: purple;" (click)="routerUpdate(user.id)"></i>
+              <i class="fa-solid fa-trash" style="color: #c63131;" (click)="openDelete(user)"></i>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+    <!-- <div class="row mt-3 p-0">
+      <div class="col-md-5 col-sm-12">
+          <label><span translate="NOTIFI.MSG_TABLE.SHOW_RECORD"></span></label>
+          <select [(ngModel)]="pageSize" (change)="initUser()" class="ms-1">
+            <option *ngFor="let row of rowsOnPageSet" [value]="row">{{ row }}</option>
+          </select>
+          <label><span translate="NOTIFI.MSG_TABLE.SHOW_TOTAL"></span>{{ totalItem }}</label>
+      </div>
+      <div class="col-md-7 col-sm-12 p-0">
+        <button class="btn-pagination float-end" (click)="lastPage()" data-toggle="tooltip" data-placement="top" title="Last"><i class="fa-solid fa-angle-right"></i></button>
+        <pagination-controls (pageChange)="onTableDataChange($event)" class="float-end">
+        </pagination-controls>
+        <button class="btn-pagination float-end" (click)="fistPage()" data-toggle="tooltip" data-placement="top" title="Fist"><i class="fa-solid fa-angle-left"></i></button>
+      </div>
+    </div> -->
+    <p-paginator (onPageChange)="onPageChange($event)" [first]="0" [rows]="pageSize" [totalRecords]="totalItem" [rowsPerPageOptions]="[10, 20, 30, 1]"></p-paginator>
+  </div>
+</div>
+

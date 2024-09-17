@@ -1,0 +1,85 @@
+// HOME
+.container{
+  width: 100%;
+}
+.row{
+  background-color: white;
+}
+.icon-size{
+  font-size: 28px;
+  margin: 12px 0px;
+}
+.p-tb-1{
+  padding: 12px 0px;
+}
+.btn-add-cart {
+  border: 1px solid #FD95AB;
+  color: #f15f7e;
+  background-color: #fdf3f5;
+  font-size: 15px;
+}
+
+// CATEGORY
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #EE3880;
+}
+.container-product{
+  background-color: white;
+  padding: 0px;
+  border-radius: 6px;
+  overflow: hidden;
+  // box-shadow: 8px black;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.container-product:hover{
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
+.two-line-ellipsis {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 2.6em; /* Fallback for non-webkit, line-height * 2 */
+  line-height: 1.3em;
+  -webkit-line-clamp: 2; /* if you change this, make sure to change the fallback line-height and height */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-style{
+  border: solid 2px #31C48D;
+  font-size: 9px;
+  color: #31C48D;
+  padding: 0px 4px;
+}
+
+.star{
+  color: #ffc600;
+  display: block;
+  font-size: 1.0rem;
+  line-height: 1.1rem;
+}
+
+
+.image-container {
+  position: relative;
+}
+.prImg, .favoriteImg {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.favoriteImg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+}
+.eMej {
+  background-color: #FF4D2D;
+  color: white;
+  width: 50%;
+  padding: 0 0 0 7px;
+  box-shadow: 0px 2px 2px 1px #8d8c8c;
+}

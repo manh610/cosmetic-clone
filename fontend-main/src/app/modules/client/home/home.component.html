@@ -1,0 +1,146 @@
+<div class="container">
+
+  <!-- Voucher -->
+  <div class="row" style="margin-top: 120px;">
+    <div class="col-lg-12 p-0 d-flex justify-content-center">
+      <app-carousel [images]="discount$" [autoSlide]="true"></app-carousel>
+    </div>
+  </div>
+
+  <!-- Brand -->
+  <div class="row mt-4" *ngIf="brand$">
+    <div class="col-lg-12 mt-3">
+      <label for="">THƯƠNG HIỆU</label>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <p-carousel [value]="brand$" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-brand pTemplate="item">
+            <div class="text-center py-3 px-2" style="background-color: white;">
+                <div class="mb-1">
+                    <img src="{{'data:image/jpg;base64,' + brand.logo}}" [alt]="brand.name" class="w-10 shadow-2 img-thumbnail" (click)="routerSearch(brand.id, 'brand')"/>
+                </div>
+                <div>
+                    <span class="mb-1" style="font-size: 13px;" (click)="routerSearch(brand.id, 'brand')">{{ brand.name }}</span>
+                </div>
+            </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <!-- Skin Type -->
+  <div class="row mt-4" *ngIf="skinType$">
+    <div class="col-lg-12 mt-3">
+      <label for="">DA BẠN CẦN GÌ ĐÓ - ĐÃ CÓ GG cos</label>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <p-carousel [value]="skinType$" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-skinType pTemplate="item">
+            <div class="text-center py-3 px-2" style="background-color: white;">
+                <div class="mb-1">
+                    <img src="{{skinType.image}}" [alt]="skinType.name" class="w-10 shadow-2 img-thumbnail" (click)="routerSearch(skinType.id, 'skinType')"/>
+                </div>
+                <div>
+                    <span class="mb-1" style="font-size: 13px;" (click)="routerSearch(skinType.id, 'skinType')">{{ skinType.description }}</span>
+                </div>
+            </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <!-- Category -->
+  <div class="row mt-4" *ngIf="categoryRoot$">
+    <div class="col-lg-12 mt-3">
+      <label for="">DANH MỤC</label>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <p-carousel [value]="categoryRoot$" [numVisible]="3" [numScroll]="3" [circular]="false" [responsiveOptions]="responsiveOptions">
+        <ng-template let-category pTemplate="item">
+            <div class="text-center py-3 px-2" style="background-color: white;">
+                <div class="mb-1">
+                    <img src="{{'data:image/jpg;base64,' + category.image}}" [alt]="category.name" class="w-10 shadow-2 img-thumbnail" (click)="routerSearch(category.id, 'category')"/>
+                </div>
+                <div>
+                    <span class="mb-1" style="font-size: 13px;" (click)="routerSearch(category.id, 'category')">{{ category.name }}</span>
+                </div>
+            </div>
+        </ng-template>
+      </p-carousel>
+    </div>
+  </div>
+
+  <!-- <div class="row mt-4">
+    <div class="col-lg-12 mt-3">
+      <div class="row d-flex align-items-center" >
+        <label class="col-lg-2" style="color: #ee4d2d; font-weight: 600; font-size: 21px; width: auto;">FLASH SALE</label>
+        <div class="col-lg-1"><app-flip-clock></app-flip-clock></div>
+        <label class="col-lg-9 d-flex justify-content-end"><a routerLink="flash-sales">Xem tất cả <i class="fa-solid fa-angle-right"></i></a> </label>
+      </div>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <app-flash-sale-item></app-flash-sale-item>
+    </div>
+  </div> -->
+
+  <!-- <div class="row mt-4">
+    <div class="col-lg-12 mt-3">
+      <label style="color: #ee4d2d; font-size: 15px;">Tìm kiếm hàng đầu</label>
+      <label class="float-end"><a routerLink="top-sales">Xem tất cả <i class="fa-solid fa-angle-right"></i></a> </label>
+    </div>
+    <div class="col-lg-12 mt-3">
+      <app-top-sales-item></app-top-sales-item>
+    </div>
+  </div> -->
+
+  <div class="row mt-4" *ngIf="product$">
+    <div class="col-lg-12 mt-3 mb-3 text-center" style="border-bottom: solid 4px #ee4d2d;">
+      <label style="color: #ee4d2d; font-size: 20px; font-weight: 400; margin-bottom: 12px;">Gợi ý cho bạn</label>
+    </div>
+    <div class="col-lg-2" style="padding: 6px; background-color: whitesmoke;" *ngFor="let product of product$">
+      <div class="mt-2 container-product" (click)="productItem(product)">
+        <div class="m-2 image-container d-flex justify-content-center" style="margin: 0px !important">
+          <img src="data:image/jpg;base64,{{product.photo}}" [alt]="product.photo" class="w-12 prImg"  />
+          <span class="favoriteImg mt-2 eMej" *ngIf="product.totalFavorite > 0">Yêu thích</span>
+        </div>
+        <div class="w-12">
+          <img src="https://media3.scdn.vn/img4/2022/11_11/OFybuwWejhmkc0t6xqJ4.png" style="width: 28%; height: auto;" alt="">
+          <img src="https://media3.scdn.vn/img4/2022/11_09/6WTj8y7uau8dW1m4jiDA.png" style="width: 28%; height: auto;" alt="">
+        </div>
+        <div class="m-2">
+          <span class="two-line-ellipsis" style="font-size: 12px; font-weight: 300"><p>{{product.name}}</p></span>
+        </div>
+        <div class="m-2">
+          <label class="label-style">{{ product.status }}</label>
+        </div>
+        <div class="w-12">
+          <div class="w-6 m-2">
+            <span style="color: #969292; font-size: 13px; text-decoration-line: line-through">{{product.minPrice | currency:'VND':'symbol'}}.000</span>
+            <span style="color: #ee4d2d; font-size: 13px"> -20%</span>
+          </div>
+          <div class="w-6 m-2"><span style="color: #ee4d2d;">{{product.maxPrice | currency:'VND':'symbol'}}.000</span></div>
+        </div>
+        <div class="w-12">
+            <div class="w-6 m-2" style="font-size: 12px; font-weight: 300;"><span>Đã bán: {{ product.totalSell }}</span></div>
+        </div>
+        <div class="w-12 d-flex flex-row" style="font-size: 12px; font-weight: 300;">
+          <div class="w-6 m-2 d-flex flex-row">
+            <span> {{product.totalStar}}/5</span>
+            <span class="star">★</span>
+          </div>
+          <div class="w-6 m-2">
+            <span class="float-end">{{ product.madeIn }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row mt-5 d-flex justify-content-center" style="background-color: whitesmoke;">
+        <button class="btn-add-cart px-3 py-2 col-lg-3" (click)="showMore()" style="margin-top: 20px; margin-bottom: 20px;"
+    data-toggle="tooltip" data-placement="top" title="Xem thêm">
+      <span>Xem thêm</span></button>
+    </div>
+  </div>
+
+
+

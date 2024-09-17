@@ -1,0 +1,116 @@
+<div class="container">
+  <div class="row" style="margin-top: 120px; font-weight: 500;">
+    <div class="col-md-12 mt-2">
+      <div class="row">
+        <div class="col-md-4">
+          <div class="row">
+            <div class="col-md-12">
+              <label for="" (click)="searchCategory()" style="cursor: pointer;">TẤT CẢ DANH MỤC</label>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <app-treeview [nodeData]="treeData" (_clickedHandler) ="nodeClick($event)" (clickExpandHandler)="expandClick($event,$event)" ></app-treeview>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="" (click)="searchBrand()" style="cursor: pointer;">LỌC THEO THƯƠNG HIỆU</label>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="flex flex-wrap gap-3">
+              <!-- flex flex-column gap-3 -->
+              <div *ngFor="let brand of brand$" class="field-checkbox">
+                  <p-radioButton [inputId]="brand.id" name="brand" [value]="brand.id" [(ngModel)]="selectedBrand" (onClick)="filterBrand($event)"></p-radioButton>
+                  <label [for]="brand.id" class="ml-2">{{ brand.name }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="" (click)="searchSkinType()" style="cursor: pointer;">LỌC THEO LOẠI DA</label>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <div class="flex flex-wrap gap-3">
+              <!-- flex flex-column gap-3 -->
+              <div *ngFor="let skinType of skinType$" class="field-checkbox">
+                  <p-radioButton [inputId]="skinType.id" name="skinType" [value]="skinType.id" [(ngModel)]="selectedSkinType" (onClick)="filterSkinType($event)"></p-radioButton>
+                  <label [for]="skinType.id" class="ml-2">{{ skinType.description }}</label>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <label for="">LỌC THEO MỨC GIÁ</label>
+              <hr>
+            </div>
+          </div>
+          <div class="row">
+            <!-- <p>{{ rangeValues[0] | currency:'VND'}}.000 - {{ rangeValues[1] | currency:'VND'}}.000</p>
+            <p-slider [(ngModel)]="rangeValues" [range]="true" displayValue="true" [min]="0" [max]="100" (onChange)="onSlideChange()"></p-slider> -->
+            <div class="col-md-12">
+              <input type="number" min="0" placeholder="đ Từ" [(ngModel)]="fromPrice"/> - <input type="number" min="0" placeholder="đ Đến" [(ngModel)]="toPrice"/>
+            </div>
+            <span class="p-error mt-2" *ngIf="!isValid">Vui lòng điền khoảng giá phù hợp</span>
+            <button class="btn-use mt-3" data-toggle="tooltip" data-placement="top" title="Áp dụng" (click)="use()">
+              <span>Áp dụng</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-8">
+          <div class="row" style="background-color: #DADADA;">
+            <div class="col-md-12">
+              <label class="mr-2">Sắp xếp theo</label>
+              <button class="btn-sm mr-2 btn-filter" (click)="newest()">Mới nhất</button>
+              <button class="btn-sm mr-2 btn-filter">Bán chạy</button>
+            </div>
+          </div>
+          <div class="row mt-2" *ngIf="product$">
+            <div class="col-lg-2" style="padding: 6px; background-color: whitesmoke;" *ngFor="let product of product$">
+              <div class="mt-2 container-product" (click)="productItem(product)">
+                <div class="m-2 image-container d-flex justify-content-center" style="margin: 0px !important">
+                  <img src="data:image/jpg;base64,{{product.photo}}" [alt]="product.photo" class="w-12"  />
+                </div>
+                <div class="w-12">
+                  <img src="https://media3.scdn.vn/img4/2022/11_11/OFybuwWejhmkc0t6xqJ4.png" style="width: 28%; height: auto;" alt="">
+                  <img src="https://media3.scdn.vn/img4/2022/11_09/6WTj8y7uau8dW1m4jiDA.png" style="width: 28%; height: auto;" alt="">
+                </div>
+                <div class="m-2">
+                  <span class="two-line-ellipsis" style="font-size: 12px; font-weight: 300"><p>{{product.name}}</p></span>
+                </div>
+                <div class="m-2">
+                  <label class="label-style">{{ product.status }}</label>
+                </div>
+                <div class="w-12">
+                  <div class="w-6 m-2">
+                    <span style="color: #969292; font-size: 13px; text-decoration-line: line-through">{{product.minPrice | currency:'VND':'symbol'}}.000</span>
+                    <span style="color: #ee4d2d; font-size: 13px"> -20%</span>
+                  </div>
+                  <div class="w-6 m-2"><span style="color: #ee4d2d;">{{product.maxPrice | currency:'VND':'symbol'}}.000</span></div>
+                </div>
+                <div class="w-12">
+                    <div class="w-6 m-2" style="font-size: 12px; font-weight: 300;"><span>Đã bán: {{ product.brandName }}</span></div>
+                </div>
+                <div class="w-12 d-flex flex-row" style="font-size: 12px; font-weight: 300;">
+                  <div class="w-6 m-2 d-flex flex-row">
+                    <span> 3/5</span>
+                    <span class="star">★</span>
+                  </div>
+                  <div class="w-6 m-2">
+                    <span class="float-end">{{ product.madeIn }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div *ngIf="!product$">
+            <i>Không có dữ liệu</i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

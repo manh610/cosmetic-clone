@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h2 class="modal-title text-uppercase" id="modal-basic-title">Chọn Mã Giảm Giá</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <div class="row" *ngIf="discount$.length > 0">
+    <div *ngFor="let item of discount$">
+      <div class="row mt-2">
+        <div class="col-md-3 offset-md-1 imgstyle">
+          <img src="{{item.image ? 'data:image/jpg;base64,' + item.image : 'assets/discount.png'}}" alt="" class="w-10 shadow-2 resizeImg"/>
+        </div>
+        <div class="col-md-6 txtstyle">
+          <span class="fw-500 fs-17">Giảm {{item.value}}%</span>
+          <div class="mt-2">
+            <span style="color: #969292;">{{item.next ? 'HSD: ' + item.endDate : 'Có hiệu lực từ ' + item.startDate}}</span>
+          </div>
+        </div>
+        <div class="col-md-1">
+          <p-radioButton [inputId]="item.id" name="item" [value]="item.id" [(ngModel)]="selectedDiscountUser"></p-radioButton>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="discount$.length == 0">
+    <i>KhÔng có dữ liệu</i>
+  </div>
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;" (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+    <i class="fa-solid fa-check"></i>&nbsp;
+    <span>Xác nhận</span></button>
+  <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+    <i class="fas fa-close"></i>&nbsp;
+    <span>Hủy</span></button>
+</div>

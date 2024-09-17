@@ -1,0 +1,38 @@
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+.btn-add {
+  border: 1px solid #609af8;
+	background-color: #609af8;
+	color: white;
+  border-radius: 5px;
+}
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+.limited-text {
+  max-width: 600px;
+  word-wrap: break-word;
+}
+.default {
+  width: 80px;
+  padding: 3px 0;
+  text-align: center;
+  border: 2px solid #FF4D2D;
+  color: #FF4D2D;
+}
+.take {
+  width: 120px;
+  padding: 3px 0;
+  text-align: center;
+  border: 2px solid #0000008A;
+  color: #0000008A;
+}

@@ -1,0 +1,96 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'add'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thêm mới nhà cung cấp</h2>
+  </div>
+  <div *ngIf="formType == 'edit'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật nhà cung cấp</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="supplierFrm" class="form-horizontal">
+    <div class="form-body">
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin nhà cung cấp</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Ký hiệu</span><span class="required"> * </span></label>
+                <input type="text" formControlName="code" class="form-control" placeholder="Nhập ký hiệu">
+                <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('code', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 3, không chứa ký tự đặc biệt</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Nhập tên">
+                <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Email</span><span class="required"> * </span></label>
+                <input type="email" formControlName="email" class="form-control" placeholder="Nhập email">
+                <small *ngIf="hasErrorInput('email', 'required')" class="p-error">
+                  <p>Email không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('email', 'email')" class="p-error">
+                  <p>Vui lòng nhập đúng địng dạng</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Số điện thoại</span><span class="required"> * </span></label>
+                <input type="text" formControlName="phone" class="form-control" placeholder="Nhập số điện thoại">
+                <small *ngIf="hasErrorInput('phone', 'required')" class="p-error">
+                  <p>Số điện thoại không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('phone', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 10, chỉ nhập số</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Quốc gia</span></label>
+                <select class="form-control" formControlName="country">
+                  <option value="VN"><span>VietNam</span></option>
+                  <option value="EN"><span>England</span></option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description" class="control-label"><span>Mô tả</span></label>
+                <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;"  (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

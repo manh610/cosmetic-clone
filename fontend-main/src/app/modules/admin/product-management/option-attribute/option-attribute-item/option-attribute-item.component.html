@@ -1,0 +1,87 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'add'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thêm mới thuộc tính</h2>
+  </div>
+  <div *ngIf="formType == 'edit'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật thuộc tính</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="attributeFrm" class="form-horizontal">
+    <div class="form-body">
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin loại da</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Ký hiệu</span><span class="required"> * </span></label>
+                <input type="text" formControlName="code" class="form-control" placeholder="Nhập ký hiệu">
+                <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('code', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 3, không chứa ký tự đặc biệt</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Nhập tên">
+                <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="description" class="control-label"><span>Mô tả</span></label>
+                <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+  <!-- <div class="row">
+    <div class="col-md-12">
+      <p>
+        <mat-form-field class="example-chip-list" appearance="outline">
+          <mat-chip-grid #chipGrid aria-label="Group selection">
+            <div *ngFor="let group of optionDetails">
+              <mat-chip-row (removed)="removeGr(group)" ngDefaultControl>
+                {{group}}
+                <button matChipRemove [attr.aria-label]="'remove ' + group">
+                  <mat-icon>cancel</mat-icon>
+                </button>
+              </mat-chip-row>
+            </div>
+          </mat-chip-grid>
+          <input placeholder="Nhập các giá trị cho thuộc tính (nhấn phím Enter để thêm)" #optionInput [formControl]="frmCtrl"
+          [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+          (matChipInputTokenEnd)="addGr($event)"/>
+          <mat-autocomplete #auto="matAutocomplete">
+          </mat-autocomplete>
+        </mat-form-field>
+      </p>
+    </div>
+  </div> -->
+  <!-- <div class="row">
+    <button class="clr" [(colorPicker)]="color" [style.background]="color">Mau</button>
+  </div> -->
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;"  (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

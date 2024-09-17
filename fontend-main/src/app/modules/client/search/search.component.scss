@@ -1,0 +1,81 @@
+.container{
+  width: 100%;
+  padding-bottom: 20px;
+}
+.row{
+  background-color: white;
+}
+.icon-size{
+  font-size: 28px;
+  margin: 12px 0px;
+}
+.p-tb-1{
+  padding: 12px 0px;
+}
+.btn-filter {
+  background-color: white;
+  border: none;
+  margin: 6px;
+}
+.p-carousel .p-carousel-indicators .p-carousel-indicator.p-highlight button {
+  background-color: #EE3880;
+}
+.container-product{
+  background-color: white;
+  padding: 0px;
+  border-radius: 6px;
+  overflow: hidden;
+  // box-shadow: 8px black;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.container-product:hover{
+  box-shadow: rgba(99, 99, 99, 0.5) 0px 2px 8px 0px;
+}
+
+.two-line-ellipsis {
+  display: block; /* Fallback for non-webkit */
+  display: -webkit-box;
+  height: 2.6em; /* Fallback for non-webkit, line-height * 2 */
+  line-height: 1.3em;
+  -webkit-line-clamp: 2; /* if you change this, make sure to change the fallback line-height and height */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.label-style{
+  border: solid 2px #31C48D;
+  font-size: 9px;
+  color: #31C48D;
+  padding: 0px 4px;
+}
+
+.star{
+  color: #ffc600;
+  display: block;
+  font-size: 1.1rem;
+  line-height: 1.1rem;
+}
+
+::ng-deep {
+  .field-checkbox > label, .field-radiobutton > label {
+    font-weight: 400;
+  }
+}
+.btn-use {
+  border: 1px solid #609af8;
+	background-color: #609af8;
+	color: white;
+  border-radius: 5px;
+}
+
+input {
+  padding: 5px 10px;
+  font-size: 12px;
+  border: 1px solid #d2d2d2;
+  border-radius: 5px;
+}
+::placeholder {
+  color: #969292;
+}

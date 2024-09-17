@@ -1,0 +1,71 @@
+<div class="container container-child">
+  <div class="col-md-5">
+    <h1 class="header-title">Quản lý mã giảm giá</h1>
+  </div>
+  <div class="row">
+      <div class="col-md-3">
+        <div class="actions  0">
+          <button class="btn-add" data-toggle="tooltip" data-placement="top" title="Thêm mới" (click)="openForm('0', 'add')">
+            <i class="fa fa-plus"></i>&nbsp;
+            <span>Thêm mới</span>
+          </button>
+        </div>
+      </div>
+      <div class="col-md-3 offset-md-3">
+          <div class="input-icon right">
+            <i class="fa-solid fa-caret-down"></i>
+            <select class="form-control" [(ngModel)]="discountType" (change)="initDiscount()" placeholder="Tìm kiếm theo loại mã">
+              <option value="">Tất cả loại mã</option>
+              <option value="VOUCHER">Phiếu giảm giá</option>
+              <option value="PROMOTION">Quảng cáo</option>
+            </select>
+          </div>
+      </div>
+      <div class="col-md-3">
+        <div class="input-icon right">
+          <i class="fa fa-search" (click)="initDiscount()"></i>
+          <input type="text" [(ngModel)]="keyword" (keyup.enter)="initDiscount()"
+                class="form-control form-control-solid input-sm" placeholder="Tìm kiếm theo từ khóa">
+        </div>
+      </div>
+  </div>
+  <div class="row">
+    <p-table
+    [value]="discount$"
+    [tableStyle]="{ 'min-width': '50rem' }"
+    [paginator]="true"
+    [rows]="10"
+    [rowsPerPageOptions]="[10, 20, 30, 1]"
+    >
+    <ng-template pTemplate="header">
+        <tr>
+            <th style="width:5%">STT</th>
+            <th style="width:13%">Ký hiệu</th>
+            <th style="width:25%">Tên</th>
+            <th style="width:17%">Thời gian bắt đầu</th>
+            <th style="width:17%">Thời gian kết thúc</th>
+            <th style="width:13%">Loại mã</th>
+            <th style="width:12%">Thao tác</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-discount let-row let-i="rowIndex">
+        <tr>
+            <td>{{ i + 1 }}</td>
+            <td>{{ discount.code }}</td>
+            <td>{{ discount.name }}</td>
+            <td>{{ discount.startDate }}</td>
+            <td>{{ discount.endDate }}</td>
+            <td>{{ discount.discountType }}</td>
+            <td>
+              <i class="fa-regular fa-pen-to-square mr-2" style="color: purple;" (click)="openForm(discount, 'edit')"
+              data-toggle="tooltip" data-placement="top" title="Cập nhật"></i>
+              <i class="fa-solid fa-trash mr-2" style="color: #c63131;" (click)="openDelete(discount)"
+              data-toggle="tooltip" data-placement="top" title="Xóa"></i>
+              <i *ngIf="discount.discountType == 'VOUCHER' && !discount.expired" class="fa-regular fa-paper-plane" style="color: green;"
+              (click)="openSend(discount)" data-toggle="tooltip" data-placement="top" title="Gửi mã"></i>
+            </td>
+        </tr>
+    </ng-template>
+    </p-table>
+  </div>
+</div>

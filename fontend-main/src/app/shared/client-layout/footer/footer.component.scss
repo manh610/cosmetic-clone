@@ -1,0 +1,20 @@
+footer {
+  width: 100%;
+  background-color: #FD95AB;
+  color: white;
+}
+.fs-12 {
+  font-size: 12px;
+}
+.wiggle-icon {
+  display: inline-block;
+  font-size: 12px;
+  animation: wiggle 1s infinite;
+}
+.pointer {
+  cursor: pointer;
+}
+.resizeImg {
+  width: 40px;
+  height: 40px;
+}

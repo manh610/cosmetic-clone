@@ -1,0 +1,226 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'add'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thêm mới mã giảm giá</h2>
+  </div>
+  <div *ngIf="formType == 'edit'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật mã giảm giá</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="discountFrm" class="form-horizontal">
+    <div class="form-body">
+      <!-- Discount -->
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin mã giảm giá</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Ký hiệu</span><span class="required"> * </span></label>
+                <input type="text" formControlName="code" class="form-control" placeholder="Nhập ký hiệu">
+                <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('code', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 3, không chứa ký tự đặc biệt</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Nhập tên">
+                <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label" style="padding-bottom: 0px;"><span>Thời gian bắt đầu</span></label>
+                <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                  <input matInput1 class="form-control" matInput1 formControlName="startDate" [matDatepicker]="picker1" placeholder="Chọn thời gian bắt đầu">
+                  <span class="date-picker-icon">
+                    <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+                  </span>
+                  <mat-datepicker #picker1></mat-datepicker>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label" style="padding-bottom: 0px;"><span>Thời gian kết thúc</span></label>
+                <div class="date-picker-container form-group" data-date-format="dd-mm-yyyy">
+                  <input matInput class="form-control" matInput formControlName="endDate" [matDatepicker]="picker" placeholder="Chọn thời gian kết thúc">
+                  <span class="date-picker-icon">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  </span>
+                  <mat-datepicker #picker></mat-datepicker>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Loại mã</span><span class="required"> * </span></label>
+                <select class="form-control" formControlName="discountType">
+                  <option value="VOUCHER">Phiếu giảm giá</option>
+                  <option value="PROMOTION">Quảng cáo</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="discountFrm.get('discountType')?.value == 'PROMOTION'">
+              <div class="form-group">
+                <label class="control-label"><span>Đường dẫn</span></label>
+                <input type="text" formControlName="path" class="form-control" placeholder="Nhập đường dẫn">
+              </div>
+            </div>
+            <div class="col-md-6" *ngIf="discountFrm.get('discountType')?.value == 'VOUCHER'">
+              <div class="form-group">
+                <label class="control-label"><span>Giá trị</span></label>
+                <div class="input-group p-0">
+                  <input type="number" min="1" max="100" formControlName="value" class="form-control" placeholder="Nhập số lượng">
+                  <span class="vat">%</span>
+                </div>
+                <!-- <input type="number" min="1" formControlName="value" class="form-control" placeholder="Nhập số lượng"> -->
+                <small *ngIf="hasErrorInput('value', 'required')" class="p-error">
+                  <p>Giá trị không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('value', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+                <small *ngIf="hasErrorInput('value', 'max')" class="p-error">
+                  <p>Giá trị không hợp lệ (vượt quá 100)</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description" class="control-label"><span>Mô tả</span></label>
+                <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <input type="file" (change)="onFileSelected($event)" style="margin-top: 10px;"/>
+              </div>
+              <br>
+              <img *ngIf="selectedFile || imageSrc" class="resizeImg img-thumbnail" [src]="imageSrc" alt="">
+            </div>
+          </div>
+          <div class="row" *ngIf="discountFrm.get('discountType')?.value == 'PROMOTION'">
+            <div class="col-md-12">
+              <mat-checkbox formControlName="show"> Hiển thị</mat-checkbox>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+      <!-- User discount -->
+      <fieldset *ngIf="userDiscount.length > 0">
+        <legend class="bold text-uppercase"><span>Danh sách người dùng được gắn mã</span></legend>
+        <p-table
+        [value]="userDiscount"
+        [tableStyle]="{ 'min-width': '30rem' }"
+        dataKey="username"
+        [paginator]="true" [rows]="5">
+        <ng-template pTemplate="header">
+            <tr>
+                <th style="width:5%">STT</th>
+                <th style="width:20%">Tài khoản</th>
+                <th style="width:25%">Họ và tên</th>
+                <th style="width:20%">Cấp bậc</th>
+                <th style="width:25%">Email</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-row let-i="rowIndex">
+            <tr>
+                <td>{{ i + 1 }}</td>
+                <td>{{ user.username }}</td>
+                <td>{{ user.familyName }} {{user.givenName}}</td>
+                <td>{{ user.userRank }}</td>
+                <td>{{ user.email }}</td>
+            </tr>
+        </ng-template>
+        </p-table>
+      </fieldset>
+      <!-- Product discount -->
+      <fieldset *ngIf="productDiscount.length > 0">
+        <legend class="bold text-uppercase"><span>Danh sách sản phẩm được gắn mã</span></legend>
+        <p-table
+          [value]="productDiscount"
+          dataKey="code"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '30rem' }">
+          <ng-template pTemplate="header">
+              <tr>
+                  <th style="width:5%">STT</th>
+                  <th style="width:20%">Ký hiệu</th>
+                  <th style="width:25%">Tên</th>
+                  <th style="width:15%">Danh mục</th>
+                  <th style="width:15%">Thương hiệu</th>
+                  <th style="width:15%">Trạng thái</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product let-row let-i="rowIndex">
+              <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>{{ product.code }}</td>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.categoryName }}</td>
+                  <td>{{ product.brandName }}</td>
+                  <td>{{ product.status == 'STOCK'?'Còn hàng':'Hết hàng'}}</td>
+              </tr>
+          </ng-template>
+          </p-table>
+      </fieldset>
+      <!-- Product Item discount -->
+      <fieldset *ngIf="productItemDiscount.length > 0">
+        <legend class="bold text-uppercase"><span>Danh sách biến thể sản phẩm được gắn mã</span></legend>
+        <p-table
+          [value]="productItemDiscount"
+          dataKey="username"
+          [paginator]="true" [rows]="5"
+          [tableStyle]="{ 'min-width': '30rem' }">
+          <ng-template pTemplate="header">
+              <tr>
+                <th>Sản phẩm</th>
+                <th></th>
+                <th></th>
+                <th style="text-align: center;">Đơn giá</th>
+                <th style="text-align: center;">Số lượng</th>
+                <th style="text-align: center;">Trạng thái</th>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-value let-row let-i="rowIndex">
+              <tr>
+              <td>
+                <img src="{{'data:image/jpg;base64,' + value.image}}"
+                alt="" class="w-10 shadow-2 resizeImg img-thumbnail"/>
+              </td>
+              <td><span>{{value.name}}</span></td>
+              <td>{{value.value}}</td>
+              <td>{{value.sellPrice | currency:'VND'}}.000</td>
+              <td>{{value.sellQuantity}}</td>
+              <td>{{value.status == 'STOCK'?'Còn hàng':'Hết hàng'}}</td>
+          </ng-template>
+          </p-table>
+      </fieldset>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;" (click)="onSubmit()" *ngIf="isSubmit"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

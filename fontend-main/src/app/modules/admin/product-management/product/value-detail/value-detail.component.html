@@ -1,0 +1,130 @@
+<div class="modal-header">
+  <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật biến thể sản phẩm</h2>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="variantFrm" class="form-horizontal">
+    <div class="form-body">
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin biến thể</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label"><span>Tên biến thể</span></label>
+                <input type="text" formControlName="value" class="form-control" placeholder="Nhập tên biến thể">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label"><span>Đơn vị đo</span></label>
+                <input type="text" formControlName="unit" class="form-control" placeholder="Nhập đơn vị đo">
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="form-group">
+                <label class="control-label"><span>Trạng thái sản phẩm</span><span class="required"> * </span></label>
+                <div class="input-icon right">
+                  <i class="fa-solid fa-caret-down"></i>
+                  <select class="form-control" formControlName="status" placeholder="Chọn trạng thái sản phẩm">
+                    <option value="" style="padding: 5px;">Trạng thái sản phẩm</option>
+                    <option value="STOCK" style="padding: 5px;">Còn hàng</option>
+                    <option value="SOLD_OUT" style="padding: 5px;">Hết hàng</option>
+                  </select>
+                  <small *ngIf="hasErrorInput('status', 'required')" class="p-error">
+                    <p>Trạng thái sản phẩm không để trống</p>
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Giá nhập</span><span class="required"> * </span></label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">VND</span>
+                  <input type="number" min="0" pInputText placeholder="Nhập giá gốc" class="form-control" formControlName="importPrice" style="border-radius: 0;"/>
+                  <span class="p-inputgroup-addon">.000</span>
+                </div>
+                <small *ngIf="hasErrorInput('importPrice', 'required')" class="p-error">
+                  <p>Giá gốc không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('importPrice', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Giá bán</span><span class="required"> * </span></label>
+                <div class="p-inputgroup">
+                  <span class="p-inputgroup-addon">VND</span>
+                  <input type="number" min="0" pInputText placeholder="Nhập giá bán" class="form-control" formControlName="sellPrice" style="border-radius: 0;"/>
+                  <span class="p-inputgroup-addon">.000</span>
+                </div>
+                <small *ngIf="hasErrorInput('sellPrice', 'required')" class="p-error">
+                  <p>Giá bán không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('sellPrice', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Số lượng nhập</span><span class="required"> * </span></label>
+                <input type="number" min="0" formControlName="importQuantity" class="form-control" placeholder="Nhập số lượng">
+                <small *ngIf="hasErrorInput('importQuantity', 'required')" class="p-error">
+                  <p>Số lượng không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('importQuantity', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Số lượng bán</span><span class="required"> * </span></label>
+                <input type="number" min="0" formControlName="sellQuantity" class="form-control" placeholder="Nhập số lượng">
+                <small *ngIf="hasErrorInput('sellQuantity', 'required')" class="p-error">
+                  <p>Số lượng không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('sellQuantity', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description" class="control-label"><span>Mô tả</span></label>
+                <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div>
+                <input type="file" (change)="onFileSelected($event)" style="margin-top: 10px;"/>
+              </div>
+              <br>
+              <img *ngIf="selectedFile || imageSrc" class="resizeImg img-thumbnail" [src]="imageSrc" alt="">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;" (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

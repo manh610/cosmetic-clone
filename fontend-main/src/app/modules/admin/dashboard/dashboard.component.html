@@ -1,0 +1,28 @@
+<div class="container" style="margin: 30px;">
+  <div class="row">
+    <div class="col-md-6">
+      <ng-container *ngIf="true; then workNotice">
+      </ng-container>
+      <ng-template #workNotice>
+        <app-order-item></app-order-item>
+      </ng-template>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6" *ngIf="statProduct.length == 0">
+      <span>Không có dữ liệu</span>
+    </div>
+    <div class="col-md-6" *ngIf="statProduct.length > 0">
+      <div class="row">
+        <!-- <ngx-charts-pie-chart [scheme]="colorScheme" [results]="statProduct" [gradient]="gradient"
+          [legend]="true" legendTitle="Sản phẩm"
+          [explodeSlices]="false" [labels]="true" [labelFormatting]="fortmatLabel1">
+          <ng-template #tooltipTemplate let-model="model">
+            <div class="limited-text"><h1 class="ng-tooltip">{{model.name}}</h1></div>
+            <h2 class="ng-tooltip"><span translate="STATISTIC.ATTACHMENT.count"></span>: {{model.value}}</h2>
+          </ng-template>
+        </ngx-charts-pie-chart> -->
+      </div>
+    </div>
+  </div>
+</div>

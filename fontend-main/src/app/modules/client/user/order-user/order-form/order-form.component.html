@@ -1,0 +1,131 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'cancel'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thông tin hủy</h2>
+  </div>
+  <div *ngIf="formType == 'delivered'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Xác nhận đơn hàng</h2>
+  </div>
+  <div *ngIf="formType == 'view'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Xem chi tiết đơn hàng</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <div class="row" *ngIf="formType == 'cancel'">
+    <div class="form-group">
+      <label class="control-label"><span>Lý do hủy đơn hàng</span></label>
+      <textarea class="form-control" [(ngModel)]="reason" rows="3" placeholder="..."
+        style="resize: vertical; max-height: 180px;"></textarea>
+    </div>
+  </div>
+  <div class="row" *ngIf="formType == 'delivered'">
+    <span>Bạn vui lòng chỉ nhấn 'Xác nhận' khi đã nhận được sản phẩm và sản phẩm không có vấn đề nào</span>
+  </div>
+  <div class="row" *ngIf="formType == 'view' && order$">
+    <fieldset class="mb-4">
+      <legend class="bold text-uppercase"><span>Thông tin đơn hàng</span></legend>
+      <div class="col-md-12">
+        <div class="row mb-2">
+          <div class="col-md-12">
+            <label class="control-label mr-1 mb-2"><span>Trạng thái đơn hàng:</span></label>
+            <span class="fs-6" *ngIf="order$.status == 'WAIT_CONFIRM'"><span style="color: blue;">Chờ xác nhận</span></span>
+            <span class="fs-6" *ngIf="order$.status == 'PREPARE'"><span style="color: blue;">Chuẩn bị hàng</span></span>
+            <span class="fs-6" *ngIf="order$.status == 'WAIT_DELIVERY'"><span style="color: blue;">Chuyển cho đơn vị giao hàng</span></span>
+            <span class="fs-6" *ngIf="order$.status == 'DELIVERING'"><span style="color: blue;">Đang giao</span></span>
+            <span class="fs-6" *ngIf="order$.status == 'DELIVERED'"><span style="color: blue;">Đã giao</span></span>
+            <span class="fs-6" *ngIf="order$.status == 'CANCELLED'"><span style="color: blue;">Đã hủy</span></span>
+          </div>
+        </div>
+        <div class="row mb-2">
+          <p-timeline [value]="events">
+            <ng-template pTemplate="content" let-event>
+                <small class="p-text-secondary">{{ event.date | date: 'yyyy-MM-dd HH-mm'}}</small>
+            </ng-template>
+            <ng-template pTemplate="opposite" let-event>
+                {{ event.status }}
+            </ng-template>
+          </p-timeline>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <div class="form-group">
+              <label class="control-label"><span>Lưu ý</span></label>
+              <textarea class="form-control" [value]="order$?.note" rows="3"
+                style="resize: vertical; max-height: 180px;"></textarea>
+            </div>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-4">
+      <legend class="bold text-uppercase"><span>Địa chỉ đơn hàng</span></legend>
+      <div class="row mb-2">
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label"><span>Tỉnh/Thành phố</span></label>
+            <input type="text" [value]="order$.provinceName" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label"><span>Quận/Huyện</span></label>
+            <input type="text" [value]="order$.districtName" class="form-control">
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="form-group">
+            <label class="control-label"><span>Xã/Phường</span></label>
+            <input type="text" [value]="order$.wardName" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="form-group">
+            <label class="control-label"><span>Địa chỉ chi tiết</span></label>
+            <textarea class="form-control" [value]="order$.addressDetail" rows="3"
+              style="resize: vertical; max-height: 180px;"></textarea>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+    <fieldset class="mb-4">
+      <legend class="bold text-uppercase"><span>Thông tin sản phẩm</span></legend>
+      <div class="row mb-3" *ngFor="let i of order$.productItem">
+        <div class="col-md-2">
+          <img src="{{i.image ? 'data:image/jpg;base64,' + i.image : 'data:image/jpg;base64,' + i.photo}}" alt="" class="w-10 shadow-2 resizeImg"/>
+        </div>
+        <div class="col-md-8">
+          <div class="row">
+            <span>{{i.name}}</span>
+            <span style="color: #969292;">Phân loại hàng: {{i.value}}</span>
+            <span>x{{i.quantity}}</span>
+            <span style="color: #969292;">Thương hiệu: {{i.brandName}}</span>
+            <span style="color: #969292;">Xuất xứ: {{i.madeIn}}</span>
+          </div>
+        </div>
+        <div class="col-md-2" style="text-align: right;">
+          <span style="color: #ee4d2d;">{{i.sellPrice | currency:'VND'}}.000</span>
+        </div>
+      </div>
+    </fieldset>
+    <div class="row">
+      <div class="col-md-12" style="text-align: right;">
+        <span>Thành tiền: <span class="fs-6" style="color: #ee4d2d;">{{order$.totalPrice | currency: 'VND'}}.000</span></span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;" (click)="onSubmit()"
+      data-toggle="tooltip" data-placement="top" title="Lưu" *ngIf="formType == 'cancel'">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;" (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu" *ngIf="formType == 'delivered'">
+    <i class="fa-solid fa-check"></i>&nbsp;
+    <span>Xác nhận</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>

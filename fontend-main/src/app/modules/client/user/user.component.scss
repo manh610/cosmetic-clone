@@ -1,0 +1,39 @@
+.title-nav-bar{
+  border-left: solid 3px #FD95AB;
+  background-color: whitesmoke;
+  padding: 4px 8px;
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 12px;
+}
+
+.nav-bar-text{
+  font-size: 13px;
+  font-weight: 300;
+}
+.nav-bar-item{
+  padding: 8px 0px;
+}
+
+.nav-bar-item:hover i{
+  cursor: pointer;
+  color: #FD95AB !important;
+}
+
+.nav-bar-item:hover .nav-bar-text{
+  cursor: pointer;
+  color: #FD95AB;
+}
+
+.active-list-item {
+  color: #3F51B5 !important; /* Note: You could also use a custom theme */
+}
+
+
+.active-link i{
+  color: #FD95AB !important;
+}
+
+.active-link .nav-bar-text{
+  color: #FD95AB !important;
+}

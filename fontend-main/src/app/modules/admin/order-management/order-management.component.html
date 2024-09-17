@@ -1,0 +1,127 @@
+<div class="container container-child">
+  <div class="col-md-5">
+    <h1 class="header-title">Quản lý đơn hàng</h1>
+  </div>
+  <div class="row mb-2">
+    <div class="col-md-4">
+      <div class="actions">
+        <button class="btn-reload" data-toggle="tooltip" data-placement="top" title="Tải lại" (click)="reload()">
+          <i class="fa fa-refresh"></i>&nbsp;
+          <span>Tải lại</span>
+        </button>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <p-dropdown [options]="user$" [(ngModel)]="userId" [filter]="true" optionLabel="username" optionValue="id"
+                      [showClear]="true" placeholder="Lọc theo nguời dùng" (ngModelChange)="initOrder()"></p-dropdown>
+    </div>
+    <div class="col-md-2">
+      <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [readonlyInput]="true" (ngModelChange)="onDateChange($event)" placeholder="Lọc theo thời gian đặt hàng"></p-calendar>
+    </div>
+    <div class="col-md-3">
+        <div class="input-icon right">
+          <i class="fa-solid fa-caret-down"></i>
+          <select class="form-control" [(ngModel)]="status" (change)="initOrder()" placeholder="Tìm kiếm theo trạng thái đơn hàng">
+            <option value="">Trạng thái đơn hàng</option>
+            <option value="WAIT_CONFIRM">Chờ xác nhận</option>
+            <option value="PREPARE">Chuẩn bị hàng</option>
+            <option value="WAIT_DELIVERY">Chuyển cho đơn vị giao hàng</option>
+            <option value="DELIVERING">Đang giao</option>
+            <option value="DELIVERED">Đã giao</option>
+            <option value="CANCELLED">Đã hủy</option>
+          </select>
+        </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-md-4">
+      <p-dropdown [options]="province$" [(ngModel)]="provinceId" [filter]="true" optionLabel="fullName" optionValue="id"
+                        [showClear]="true" placeholder="Lọc theo Tỉnh/Thành phố" (onClick)="selectProvince()" (onClear)="clearProvince()"></p-dropdown>
+    </div>
+    <div class="col-md-4">
+      <p-dropdown [options]="district$" [(ngModel)]="districtId" [filter]="true" optionLabel="fullName" optionValue="id"
+                        [showClear]="true" placeholder="Lọc theo Quận/Huyện" (onClick)="selectDistrict()" (onClear)="clearDistrict()"></p-dropdown>
+    </div>
+    <div class="col-md-4">
+      <p-dropdown [options]="ward$" [(ngModel)]="wardId" [filter]="true" optionLabel="fullName" optionValue="id"
+                        [showClear]="true" placeholder="Lọc theo Phường/Xã" (onClick)="initOrder()" (onClear)="initOrder()"></p-dropdown>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="container">
+      <div class="row" *ngFor="let item of order$ | paginate: { itemsPerPage: pageSize, currentPage: page, totalItems: totalData}">
+        <div class="row mb-3">
+          <div class="col-md-4">
+            <i class="fa-solid fa-circle-user mr-2" style="font-size: 40px;" *ngIf="!item.avatar"></i>
+            <img src="data:image/jpg;base64,{{item.avatar}}" [alt]="" class="resizeAvatar mr-2" *ngIf="item.avatar">
+            <span style="color: #969292;" class="mr-2">{{item.username}}</span>
+            <span style="color: #969292;">Ngày đặt hàng: {{item.orderDate | date:'YYYY-MM-dd'}}</span>
+          </div>
+          <div class="col-md-4" style="text-align: center;">
+            <span class="fs-7" *ngIf="item.status == 'WAIT_CONFIRM'">Trạng thái: <span style="color: blue;">Chờ xác nhận</span></span>
+            <span class="fs-7" *ngIf="item.status == 'PREPARE'">Trạng thái: <span style="color: blue;">Chuẩn bị hàng</span></span>
+            <span class="fs-7" *ngIf="item.status == 'WAIT_DELIVERY'">Trạng thái: <span style="color: blue;">Chuyển cho đơn vị giao hàng</span></span>
+            <span class="fs-7" *ngIf="item.status == 'DELIVERING'">Trạng thái: <span style="color: blue;">Đang giao</span></span>
+            <span class="fs-7" *ngIf="item.status == 'DELIVERED'">Trạng thái: <span style="color: blue;">Đã giao</span></span>
+            <span class="fs-7" *ngIf="item.status == 'CANCELLED'">Trạng thái: <span style="color: blue;">Đã hủy</span></span>
+          </div>
+          <div class="col-md-3 fs-7" style="text-align: center;">
+            <span>Thành tiền: <span class="ml-1" style="color: #ee4d2d;">{{item.totalPrice | currency:'VND'}}.000</span></span>
+          </div>
+          <div class="col-md-1" style="text-align: right;">
+            <i class="fa-solid fa-angle-up" (click)="expand(item)" *ngIf="!item.isExpand"></i>
+            <i class="fa-solid fa-angle-down" (click)="expand(item)" *ngIf="item.isExpand"></i>
+          </div>
+        </div>
+        <div class="row" *ngIf="item.isExpand">
+          <div class="row mb-3" *ngFor="let i of item.productItem">
+            <div class="col-md-2">
+              <img src="{{i.image ? 'data:image/jpg;base64,' + i.image : 'data:image/jpg;base64,' + i.photo}}" alt="" class="w-10 shadow-2 resizeImg"/>
+            </div>
+            <div class="col-md-8">
+              <div class="row">
+                <span>{{i.name}}</span>
+                <span style="color: #969292;">Phân loại hàng: {{i.value}}</span>
+                <span>x{{i.quantity}}</span>
+              </div>
+            </div>
+            <div class="col-md-2" style="text-align: right;">
+              <span style="color: #ee4d2d;">{{i.sellPrice | currency:'VND'}}.000</span>
+            </div>
+          </div>
+          <div class="col-md-12" style="text-align: center;">
+            <button class="btn-sm btn-buy-now mr-2" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+            <button class="btn-sm btn-add-cart px-4" (click)="updateStatus(item)"
+            *ngIf="item.status == 'WAIT_CONFIRM' || item.status == 'PREPARE' || item.status == 'WAIT_DELIVERY'"
+            >Duyệt</button>
+          </div>
+        </div>
+        <hr>
+      </div>
+
+      <div class="row py-4 px-4" *ngIf="order$.length == 0">
+        <div class="row" style="text-align: center;">
+          <div class="col-md-12 mb-2">
+            <i class="fa-solid fa-receipt" style="font-size: 40px; color: #969292;"></i>
+          </div>
+          <i>Chưa có đơn hàng</i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-3 p-0">
+    <div class="col-md-5 col-sm-12">
+        <label>Hiển thị số bản ghi</label>
+        <select [(ngModel)]="pageSize" (change)="search()" class="ms-1">
+          <option *ngFor="let row of rowsOnPageSet" [value]="row">{{ row }}</option>
+        </select>
+        <label><span>/Trong tổng số </span>{{ totalData }}</label>
+    </div>
+    <div class="col-md-7 col-sm-12 p-0">
+      <pagination-controls (pageChange)="onChange($event)" class="float-end"></pagination-controls>
+    </div>
+  </div>
+</div>

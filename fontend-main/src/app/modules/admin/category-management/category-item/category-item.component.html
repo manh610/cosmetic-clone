@@ -1,0 +1,128 @@
+<div class="modal-header">
+  <div *ngIf="formType == 'add'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Thêm mới danh mục sản phẩm</h2>
+  </div>
+  <div *ngIf="formType == 'edit'">
+    <h2 class="modal-title text-uppercase" id="modal-basic-title">Cập nhật danh mục sản phẩm</h2>
+  </div>
+  <button type="button" class="btn-close" aria-label="Close" (click)="cancel()"></button>
+</div>
+<div class="modal-body">
+  <form action="#" id="form_group" [formGroup]="categoryFrm" class="form-horizontal">
+    <div class="form-body">
+      <fieldset>
+        <legend class="bold text-uppercase"><span>Thông tin danh mục</span></legend>
+        <div class="col-md-12">
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Ký hiệu</span><span class="required"> * </span></label>
+                <input type="text" formControlName="code" class="form-control" placeholder="Nhập ký hiệu">
+                <small *ngIf="hasErrorInput('code', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('code', 'pattern')" class="p-error">
+                  <p>Độ dài tối thiểu là 3, không chứa ký tự đặc biệt</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Tên</span><span class="required"> * </span></label>
+                <input type="text" formControlName="name" class="form-control" placeholder="Nhập tên">
+                <small *ngIf="hasErrorInput('name', 'required')" class="p-error">
+                  <p>Ký hiệu không để trống</p>
+                </small>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Cấp bậc</span><span class="required"> * </span></label>
+                <input type="number" min="1" formControlName="offset" class="form-control" placeholder="Nhập cấp bậc">
+                <small *ngIf="hasErrorInput('offset', 'required')" class="p-error">
+                  <p>Cấp bậc không để trống</p>
+                </small>
+                <small *ngIf="hasErrorInput('offset', 'pattern')" class="p-error">
+                  <p>Nhập số dương</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="parentId" class="control-label"><span>Danh mục cấp cha</span></label>
+                  <p>
+                  <p-dropdown [options]="category$" formControlName="parentId" [filter]="true" [showClear]="true" optionLabel="name" optionValue="id"
+                        placeholder="Chọn danh mục cha">
+                  </p-dropdown>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-2">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="control-label"><span>Đường dẫn</span><span class="required"> * </span></label>
+                <input type="text" formControlName="path" class="form-control" placeholder="Nhập đường dẫn">
+                <small *ngIf="hasErrorInput('path', 'required')" class="p-error">
+                  <p>Đường dẫn không để trống</p>
+                </small>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="icon" class="control-label"><span>Biểu tượng</span></label>
+                  <p>
+                  <p-dropdown [options]="icons" formControlName="icon" [filter]="true" optionLabel="name" [showClear]="true" optionValue="name" placeholder="Chọn biểu tượng">
+                    <ng-template pTemplate="selectedItem">
+                      <div class="flex align-items-center gap-2" *ngIf="categoryFrm.get('icon')?.value != null || categoryFrm.get('icon')?.value != undefined">
+                          <i [ngClass]="categoryFrm.get('icon')?.value"></i>
+                          <div>{{ categoryFrm.get('icon')?.value }}</div>
+                      </div>
+                    </ng-template>
+                    <ng-template let-item pTemplate="item">
+                        <div class="flex align-items-center gap-2">
+                          <i [ngClass]="item.name"></i>
+                            <div>{{ item.name }}</div>
+                        </div>
+                    </ng-template>
+                  </p-dropdown>
+                  </p>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label for="description" class="control-label"><span>Mô tả</span></label>
+                <textarea class="form-control" formControlName="description" rows="3" placeholder="..."
+                  style="resize: vertical; max-height: 180px;"></textarea>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <!-- <img *ngIf="!selectedFile && !categoryFrm.get('image')?.value" class="resizeDf" src="assets/user/avatar.png" alt=""> -->
+              <div>
+                <input type="file" (change)="onFileSelected($event)" style="margin-top: 10px;"/>
+              </div>
+              <br>
+              <img *ngIf="selectedFile || imageSrc" class="resizeImg img-thumbnail" [src]="imageSrc" alt="">
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-primary btn-save mr-1" style="background-color: #609af8;"  (click)="onSubmit()"
+    data-toggle="tooltip" data-placement="top" title="Lưu">
+      <i class="fa-solid fa-check"></i>&nbsp;
+      <span>Lưu</span></button>
+    <button type="button" class="btn btn-danger btn-cancel" data-toggle="tooltip" data-placement="top" title="Hủy" (click)="cancel()">
+      <i class="fas fa-close"></i>&nbsp;
+      <span>Hủy</span></button>
+</div>
+<pre>
+  {{ categoryFrm.value | json}}
+</pre>

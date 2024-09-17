@@ -1,0 +1,260 @@
+input {
+  font-size: 15px;
+}
+.btn-save {
+  background-color: rgb(96, 154, 248);
+  border: rgb(96, 154, 248);
+  font-size: 16px;
+  font-weight: 500;
+  padding: 10px 40px 10px 40px;
+  border-radius: 50px;
+}
+
+.btn-cancel {
+  font-size: 16px;
+  font-weight: 500;
+  padding: 9px 20px 9px 20px;
+  border-radius: 50px;
+}
+.btn-remove {
+  border: none;
+  border-radius: 6px;
+  padding: 5px 30px 2px 30px;
+}
+textarea {
+  font-size: 15px;
+}
+.resizeImg {
+  width: 80px;
+  height: 80px;
+}
+//---------P-Dropdown
+::ng-deep {
+  .p-dropdown {
+    border-radius: 7px;
+    width: 100%;
+  }
+  .p-dropdown .p-dropdown-label.p-placeholder {
+    color: #969292;
+  }
+  .p-inputtext {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 14px;
+    border-radius: 20px;
+  }
+  .p-dropdown-item {
+    font-size: 16px;
+  }
+  .p-icon {
+    width: 12px;
+    height: 12px;
+  }
+  .p-dropdown-filter-icon {
+    margin-top: -4px;
+  }
+  .p-dropdown-clear-icon {
+    margin-top: -6px;
+  }
+}
+::ng-deep {
+  .p-calendar {
+    width: 100%;
+  }
+  .p-calendar .p-inputtext {
+    border-radius: 10px;
+    padding: 8px;
+  }
+}
+::ng-deep {
+  .p-multiselect {
+    width: 100%;
+    border-radius: 10px;
+  }
+  .p-multiselect .p-multiselect-label {
+    padding: 0.4rem 0.5rem;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+  }
+  .p-multiselect .p-multiselect-label.p-placeholder {
+    color: #969292;
+  }
+  .p-multiselect-panel .p-multiselect-items .p-multiselect-item {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+  }
+  .p-multiselect.p-multiselect-chip .p-multiselect-token {
+    border-radius: 20px;
+    font-size: 13px;
+    margin-right: 5px;
+  }
+}
+
+::ng-deep {
+  .p-chips .p-chips-multiple-container .p-chips-token {
+    border-radius: 20px;
+  }
+  .p-chips .p-chips-multiple-container .p-chips-input-token input {
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 15px;
+  }
+}
+::placeholder {
+  color: #969292;
+}
+::ng-deep {
+  .p-button {
+    border: 1px solid ;
+    // background-color: #609af8;
+    padding: 6px 8px 5px 8px;
+    font-size: 12px;
+    border-radius: 20px;
+  }
+
+  .p-fileupload .p-fileupload-row > div {
+    padding: 0.25rem 0.5rem;
+  }
+  .p-fileupload-row>div {
+    font-size: 16px;
+  }
+  .p-button.p-button-icon-only {
+    border-radius: 8px;
+  }
+}
+
+.container-child {
+  margin: 30px;
+  border: 1px solid #efeeee;
+  background-color: #fff;
+  width: 95%;
+}
+.header-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin: 20px 0px 50px 0px;
+}
+button {
+	border-radius: 20px;
+	font-size: 14px;
+	// font-weight: bold;
+	padding: 8px 12px;
+	// letter-spacing: 1px;
+	// text-transform: uppercase;
+  margin: 0px 0px 10px 0px;
+	transition: transform 80ms ease-in;
+}
+
+.btn-add {
+  border: 1px solid #609af8;
+	background-color: #609af8;
+	color: white;
+  padding: 15px 55px 15px 55px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.btn-back {
+  border: 1px solid #9E9E9E;
+	background-color: #9E9E9E;
+	color: white;
+  padding: 15px 40px 15px 40px;
+  font-size: 17px;
+  font-weight: 500;
+}
+.preview {
+  color: rgba(0, 0, 0, 0.54) !important;
+}
+.preview:hover, .preview:active, .preview:focus {
+  color: #212121;
+}
+//ICON
+.input-icon {
+  position: relative;
+}
+.input-icon.right>i {
+  right: 8px;
+  float: right;
+}
+.input-icon > i {
+  color: #ccc;
+  display: block;
+  position: absolute;
+  margin: 12px 4px 4px 10px;
+  z-index: 3;
+  width: 16px;
+  font-size: 16px;
+  text-align: center;
+}
+.input-icon.right>.form-control {
+  padding-right: 33px;
+  padding-left: 12px;
+}
+.form-control {
+  font-size: 14px;
+  font-weight: normal;
+  color: #333;
+  background-color: #FFF;
+  border: 1px solid #e5e5e5;
+  box-shadow: 1px solid #222 !important;
+  transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+  border-radius: 20px;
+}
+.date-picker-container {
+  display: flex;
+  align-items: center;
+}
+.date-picker-icon {
+  cursor: pointer;
+  /* Thêm các kiểu khác như màu sắc hoặc hiệu ứng */
+}
+.editor {
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+
+  .NgxEditor__MenuBar {
+    border-top-left-radius: 40;
+    border-top-right-radius: 40;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  }
+
+  .NgxEditor {
+    border-radius: none;
+    border: none;
+  }
+
+  .CodeMirror {
+    height: auto;
+    margin-bottom: 0.7rem;
+
+    pre {
+      white-space: pre !important;
+    }
+  }
+}
+
+
+.active {
+  background-color: #FFF;
+}
+.delete {
+  background-color: rgb(247 225 225);
+}
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.cancel-button {
+  position: absolute;
+  top: -5px;
+  // right: 35px;
+  background-color: #DADADA; /* Màu nền của nút "Cancel" */
+  color: #ffffff; /* Màu chữ của nút "Cancel" */
+  border: none;
+  padding: 0px 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Hiệu ứng chuyển đổi màu nền */
+}
+
+.cancel-button:hover {
+  background-color: #969292; /* Màu nền khi di chuột vào nút "Cancel" */
+}

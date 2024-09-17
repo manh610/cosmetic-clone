@@ -1,0 +1,82 @@
+h1,
+h3 {
+  color: green;
+  font-family: "Roboto", sans-serif;
+  text-align: center;
+}
+
+.mat-tree {
+  background: transparent;
+}
+
+.mat-tree-node {
+  color: black;
+  border-bottom: 1px dotted rgb(132, 130, 130);;
+}
+.mat-tree-node.active{
+  background: #36c6d3 !important;
+  border-top-color: transparent;
+  color: white !important;
+  font-weight: bold;
+}
+.material-icons{
+  font-size: 14px;
+}
+.mat-icon-rtl-mirror{
+  font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;
+    line-height: 1;
+    letter-spacing: normal;
+    text-transform: none;
+    display: inline-block;
+    white-space: nowrap;
+    word-wrap: normal;
+    direction: ltr;
+    -webkit-font-feature-settings: 'liga';
+    -webkit-font-smoothing: antialiased;
+}
+.mat-icon-button {
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  color: inherit;
+  background: transparent;
+  box-sizing: border-box;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    outline: none;
+    border: none;
+    -webkit-tap-highlight-color: transparent;
+    display: inline-block;
+    white-space: nowrap;
+    text-decoration: none;
+    vertical-align: baseline;
+    text-align: center;
+    margin: 0;
+    padding: 8px 16px;
+    border-radius: 4px;
+    overflow: visible;
+}
+.mat-button-custom{
+  right: 20px;
+  position: absolute;
+  border-radius: 0;
+  display: none;
+}
+.split-button-1 mat-icon{
+  font-size: 20px;
+}
+mat-tree-node:hover{
+  cursor: pointer;
+}
+mat-tree-node:hover .mat-button-custom{
+  display:block;
+}

@@ -1,0 +1,251 @@
+<div class="container">
+  <div class="row"></div>
+  <!-- <section class="breadcrumb-section set-bg" [ngStyle]="{backgroundImage:'url(assets/image/breadcrumb.jpg'}">
+      <div class="container">
+          <div class="row">
+              <div class="col-lg-12 text-center">
+                  <div class="breadcrumb__text">
+                      <h2>Thanh Toán</h2>
+                      <div class="breadcrumb__option">
+                          <a routerLink="/" >Home</a>
+                          <span>Checkout</span>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </section> -->
+
+  <div class="container mb-3" *ngIf="product$ != null">
+    <div class="row">
+      <!-- Pho & Image -->
+      <div class="col-lg-4 col-md-6">
+        <div *ngIf="variant$ && isPhoto && isVariant">
+          <img src="data:image/jpg;base64,{{variant$.image}}" [alt]="" style="width: 100%;" class="resizePhoto img-thumbnail">
+        </div>
+        <div *ngIf="isPhoto && (!variant$ || !isVariant)">
+          <img src="data:image/jpg;base64,{{product$.photo}}" [alt]="product$.photo" style="width: 100%;" class="resizePhoto img-thumbnail">
+        </div>
+        <div *ngIf="!isPhoto">
+          <img src="data:image/jpg;base64,{{photo}}" [alt]="photo" style="width: 100%;" class="resizePhoto img-thumbnail">
+        </div>
+        <div>
+          <p-carousel [value]="product$.images" [numVisible]="3" [numScroll]="3" [circular]="false">
+            <ng-template let-image pTemplate="item">
+                <div class="text-center py-3 px-2" style="background-color: white;">
+                    <div class="mb-1">
+                        <img src="{{'data:image/jpg;base64,' + image.data}}" alt="" class="w-10 shadow-2 resizeImg img-thumbnail" (click)="slideImg(image)"/>
+                    </div>
+                </div>
+            </ng-template>
+          </p-carousel>
+      </div>
+      </div>
+      <div class="col-lg-8 col-md-6">
+        <!-- Name -->
+        <div class="row mt-4">
+          <h3><span class="favorite mr-1" *ngIf="product$.totalFavorite > 0">Yêu thích</span>{{ product$.name }}</h3>
+        </div>
+        <!-- Star & Review & Sold -->
+        <div class="row">
+          <div class="col-lg-4" style="border-right: 1px solid #DADADA;">
+            <div class="fs- d-flex flex-row">
+              <span> {{product$.totalStar}}/5</span>
+              <p-rating [disabled]="true" [(ngModel)]="value" [cancel]="false" style="margin-top: -3px;" class="ml-2"></p-rating>
+            </div>
+          </div>
+          <div class="col-lg-4" style="border-right: 1px solid #DADADA;">
+            <div class="fs- d-flex flex-row">
+              <span> {{product$.totalReview}}</span>
+              <span class="ml-2">Đánh giá</span>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="fs- d-flex flex-row">
+              <span> {{product$.totalSell}}</span>
+              <span class="ml-2">Đã bán</span>
+            </div>
+          </div>
+        </div>
+        <!-- Price -->
+        <div class="row" style="background-color: #f6f6f67d;">
+          <span *ngIf="variant$" class="price">{{variant$.sellQuantity.toFixed(0) | currency:'VND':'symbol'}}.000</span>
+          <span *ngIf="product$.minPrice == product$.maxPrice && !variant$" class="price">{{product$.minPrice.toFixed(0) | currency:'VND':'symbol'}}.000</span>
+          <span *ngIf="product$.minPrice != product$.maxPrice && !variant$" class="price">{{product$.minPrice.toFixed(0) | currency:'VND':'symbol'}}.000 - {{product$.maxPrice.toFixed(0) | currency:'VND':'symbol'}}.000</span>
+        </div>
+        <!-- Discount -->
+        <div class="row mt-3" *ngIf="product$.productDiscounts.length > 0">
+          <div class="col-md-12">
+            <label class="mr-2 mb-2" style="color: #969292;" for="">Mã giảm giá</label>
+            <div class="row" *ngFor="let item of product$.productDiscounts">
+              <div class="col-md-12">
+                <span class="discount mr-1">Giảm {{item.value}}%</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Variant -->
+        <div class="row mt-3" *ngIf="isVariant">
+          <label style="color: #969292;" for="">Biến thể</label>
+          <div class="row">
+            <div class="col-md-3" *ngFor="let item of product$.valueDetails">
+              <button class="hUWqqt _69cHHm" aria-label="Cấp Nước" aria-disabled="false" style="width: 100%;" (click)="variant(item)">
+                <img class="I2jugL img-thumbnail" src="{{'data:image/jpg;base64,' + item.image}}">
+                <span style="margin-left: 35px;">{{item.value}}</span></button>
+            </div>
+          </div>
+        </div>
+        <!-- Quantity -->
+        <div class="row mt-7">
+          <div class="col-md-12">
+            <label class="mr-2" style="color: #969292;">Số lượng</label>
+            <p-inputNumber [(ngModel)]="value2" [showButtons]="true" buttonLayout="horizontal" inputId="horizontal" spinnerMode="horizontal" [step]="1" [min]="1"
+                [max]="product$.totalQuantity" decrementButtonClass="btn-sm" incrementButtonClass="btn-sm" incrementButtonIcon="pi pi-plus" decrementButtonIcon="pi pi-minus"
+                class="mr-2"></p-inputNumber>
+            <label style="color: #969292;">{{product$.totalQuantity}} sản phẩm có sẵn</label>
+          </div>
+        </div>
+        <!-- Share & Favorite -->
+        <div class="row mt-3">
+          <div class="col-md-6" style="border-right: 1px solid #DADADA;">
+            <label class="mr-2">Chia sẻ</label>
+            <i class="fa-brands fa-facebook-messenger fs-22" style="color: #0384ff;"></i>&nbsp;
+            <i class="fa-brands fa-facebook fs-22 mr-2" style="color: #3b5999;"></i>&nbsp;
+          </div>
+          <div class="col-md-6">
+            <i class="fa-regular fa-heart fs-17" style="color: #f15f7e;" *ngIf="!isFavorite" (click)="addToFavorite()"></i>&nbsp;
+            <i class="fa-solid fa-heart fs-17" style="color: #f15f7e;" *ngIf="isFavorite" (click)="removeFromFavorite()"></i>&nbsp;
+            <span>Đã thích ({{product$.totalFavorite}})</span>
+          </div>
+        </div>
+        <!-- Button -->
+        <div class="row mt-3">
+          <div class="col-md-12">
+            <button class="btn-add-cart mr-2 px-3 py-2" (click)="addToCart()" data-toggle="tooltip" data-placement="top" title="Thêm vào giỏ hàng">
+              <i class="fa-solid fa-cart-plus"></i>&nbsp;
+              <span>Thêm vào giỏ hàng</span></button>
+            <button class="btn-buy-now px-6 py-2" (click)="buy()" data-toggle="tooltip" data-placement="top" title="Mua ngay"><span>Mua ngay</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+    <!-- Detail & Description -->
+    <div class="row">
+      <div class="row">
+        <label class="py-3" style="background-color: #f6f6f67d;">THÔNG TIN CHI TIẾT SẢN PHẨM</label>
+      </div>
+      <div class="row">
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Danh mục</label>
+          </div>
+          <div class="col-md-9">
+            <label>{{product$.categoryName}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Kho hàng</label>
+          </div>
+          <div class="col-md-9">
+            <label>{{product$.totalQuantity}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Hạn sử dụng</label>
+          </div>
+          <div class="col-md-9">
+            <label>{{productionDate}} - {{expirationDate}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Loại da</label>
+          </div>
+
+          <div class="col-md-9">
+            <div class="row">
+              <div class="col-md-3" *ngFor="let item of product$.skinTypes">
+                <span class="skintype">{{item.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Xuất sứ</label>
+          </div>
+          <div class="col-md-9">
+            <label>{{product$.madeIn}}</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-3">
+            <label style="color: #969292;">Thương hiệu</label>
+          </div>
+          <div class="col-md-9">
+            <label>{{product$.brandName}}</label>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <label class="py-3" style="background-color: #f6f6f67d;">MÔ TẢ SẢN PHẨM</label>
+        <p [innerHTML]="product$.description"></p>
+      </div>
+    </div>
+    <hr>
+    <!-- Review -->
+    <div class="row">
+      <div class="row mb-2">
+        <label class="py-3" style="background-color: #f6f6f67d;">ĐÁNH GIÁ SẢN PHẨM</label>
+      </div>
+      <div class="row py-4 ml-2 mb-3" style="background-color: #fffbf8; border: 1px solid #f7ebe1; width: 96%;">
+        <div class="col-md-3">
+          <div class="row" style="line-height: 2rem; text-align: center;">
+            <span><strong class="fs-4">4.9</strong><span class="fs-6"> trên 5</span></span>
+            <p-rating [disabled]="true" [(ngModel)]="value" [cancel]="false" style="margin-top: -3px;" class="ml-2"></p-rating>
+          </div>
+        </div>
+        <div class="col-md-9">
+          <button [class]="star==0? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(0)">Tất cả</button>
+          <button [class]="star==5? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(5)">5 Sao</button>
+          <button [class]="star==4? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(4)">4 Sao</button>
+          <button [class]="star==3? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(3)">3 Sao</button>
+          <button [class]="star==2? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(2)">2 Sao</button>
+          <button [class]="star==1? 'btn-filter-active' : 'btn-filter'" class="btn-sm mr-2" (click)="filterStar(1)">1 Sao</button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="review$.length > 0">
+        <div class="row" *ngFor="let item of review$">
+          <div class="col-md-1">
+            <i class="fa-solid fa-circle-user" style="font-size: 40px;" *ngIf="!item.avatar"></i>
+            <img src="data:image/jpg;base64,{{item.avatar}}" [alt]="" class="resizeAvatar" *ngIf="item.avatar">
+          </div>
+          <div class="col-md-11">
+            <div class="row">
+              <span style="font-size: 16px; font-weight: 500;">{{item.username}}</span>
+              <p-rating [disabled]="true" [(ngModel)]="item.star" [cancel]="false" style="padding: 0px;" class="ml-2"></p-rating>
+              <span style="font-size: 16px; color: #969292;">
+                <span style="border-right: 1px solid;">{{item.createdAt | date:'yyyy-mm-dd hh:mm'}} </span>
+                <span class="ml-1">Phân loại hàng: {{item.value}}</span>
+              </span>
+              <span style="word-wrap: break-word;">{{item.comment}}</span>
+              <div class="row mt-2 mb-3">
+                <div class="col-md-2" *ngFor="let i of item.images">
+                  <img src="data:image/jpg;base64,{{i}}" [alt]="" class="resizeReview">
+                </div>
+              </div>
+            </div>
+          </div>
+          <hr>
+        </div>
+      </div>
+      <div class="row" *ngIf="review$.length == 0">
+        <i style="text-align: center;">Không có dữ liệu</i>
+      </div>
+    </div>
+  </div>
+</div>

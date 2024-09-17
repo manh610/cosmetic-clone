@@ -1,0 +1,78 @@
+<div class="container">
+  <div class="row mt-3" *ngFor="let item of order$">
+    <div class="row mb-3" *ngFor="let i of item.productItem">
+      <div class="col-md-2">
+        <img src="{{i.image ? 'data:image/jpg;base64,' + i.image : 'data:image/jpg;base64,' + i.photo}}" alt="" class="w-10 shadow-2 resizeImg"/>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <span>{{i.name}}</span>
+          <span style="color: #969292;">Phân loại hàng: {{i.value}}</span>
+          <span>x{{i.quantity}}</span>
+        </div>
+      </div>
+      <div class="col-md-2" style="text-align: right;">
+        <span style="color: #ee4d2d;">{{i.sellPrice | currency:'VND'}}.000</span>
+      </div>
+    </div>
+    <div class="row" style="background-color: #f6f7f3;">
+      <hr>
+      <div class="row">
+        <div class="col-md-12" style="text-align: right;">
+          <span>Thành tiền: <span class="fs-6" style="color: #ee4d2d;">{{item.totalPrice | currency:'VND'}}.000</span></span>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'WAIT_CONFIRM'">
+        <div class="col-md-12" style="text-align: center;">
+          <button class="btn-sm btn-buy-now px-4 mr-2" (click)="openForm(item.id, 'cancel')">Hủy</button>
+          <button class="btn-sm btn-buy-now" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'PREPARE'">
+        <div class="col-md-12" style="text-align: center;">
+          <button class="btn-sm btn-buy-now px-4 mr-2" (click)="openForm(item.id, 'cancel')">Hủy</button>
+          <button class="btn-sm btn-buy-now" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'WAIT_DELIVERY'">
+        <div class="col-md-12" style="text-align: center;">
+          <button class="btn-sm btn-buy-now" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'DELIVERING'">
+        <div class="col-md-8">
+          <span style="color: #969292;">Vui lòng chỉ nhấn "Đã nhận được hàng" khi đơn hàng đã được giao đến bạn và sản phẩm nhận được không có vấn đề nào</span>
+        </div>
+        <div class="col-md-4" style="text-align: right;">
+          <button class="btn-sm btn-buy-now mr-2" (click)="openForm(item.id, 'delivered')">Đã nhận được hàng</button>
+          <button class="btn-sm btn-buy-now" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'DELIVERED'">
+        <div class="col-md-8">
+        </div>
+        <div class="col-md-4" style="text-align: right;">
+          <!-- <button class="btn-sm btn-buy-now mr-2">Mua lại</button> -->
+          <button class="btn-sm btn-buy-now mr-2" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+          <button class="btn-sm btn-add-cart">Đánh giá</button>
+        </div>
+      </div>
+      <div class="row mb-2" *ngIf="item.status == 'CANCELLED'">
+        <div class="col-md-12" style="text-align: center;">
+          <button class="btn-sm btn-buy-now" (click)="openForm(item.id, 'view')">Xem chi tiết</button>
+          <!-- <button class="btn-sm btn-buy-now">Mua lại</button> -->
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+
+  <div class="row py-4 px-4" *ngIf="order$.length == 0">
+    <div class="row" style="text-align: center;">
+      <div class="col-md-12 mb-2">
+        <i class="fa-solid fa-receipt" style="font-size: 40px; color: #969292;"></i>
+      </div>
+      <i>Chưa có đơn hàng</i>
+    </div>
+  </div>
+</div>

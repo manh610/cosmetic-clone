@@ -1,0 +1,28 @@
+<div class="container" *ngIf="discount$.length > 0">
+  <h4 class="mt-4 mb-4">Mã giảm giá</h4>
+  <div class="row" *ngFor="let item of discount$ let i = index">
+    <div class="row mb-3">
+      <div class="col-md-1 sttstyle">
+        <span>{{i + 1}}</span>
+      </div>
+      <div class="col-md-1 imgstyle">
+        <img src="{{item.image ? 'data:image/jpg;base64,' + item.image : 'assets/discount.png'}}" alt="" class="w-10 shadow-2 resizeImg"/>
+      </div>
+      <div class="col-md-3 txtstyle">
+        <span class="fw-500 fs-17">Giảm {{item.value}}%</span>
+        <div class="mt-2">
+          <span style="color: #969292;">{{item.next ? 'HSD: ' + item.endDate : 'Có hiệu lực từ' + item.startDate}}</span>
+        </div>
+      </div>
+      <div class="col-md-7">
+        {{item.name}}
+      </div>
+    </div>
+  </div>
+</div>
+<div class="container" *ngIf="discount$.length == 0">
+  <h4 class="mt-4 mb-4">Mã giảm giá</h4>
+  <div class="row">
+    <i style="text-align: center;">Không có dữ liệu</i>
+  </div>
+</div>
