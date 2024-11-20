@@ -30,7 +30,7 @@ const routes: Routes = [
       {
         path: 'ggcos/profile',
         loadChildren: () => import("./user/user.module").then(m => m.UserModule),
-        canActivate: [AuthGuardService],
+        
         title: 'Thông tin cá nhân'
       },
       {
@@ -41,7 +41,7 @@ const routes: Routes = [
       {
         path: 'cart',
         component: CartComponent,
-        canActivate: [AuthGuardService],
+        
         title: 'Giỏ hàng'
       },
       // {

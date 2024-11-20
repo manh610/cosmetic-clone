@@ -17,14 +17,14 @@ import { ToastrModule } from 'ngx-toastr';
 import { ButtonModule } from 'primeng/button';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { OrderManagementComponent } from './order-management.component';
-import { OrderItemComponent } from './order-item/order-item.component';
+import { OrderItemComponent } from '../dashboard/order-item/order-item.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CalendarModule } from 'primeng/calendar';
 
 @NgModule({
   declarations: [
     OrderManagementComponent,
-    OrderItemComponent
+    // OrderItemComponent
   ],
   imports: [
     CommonModule,

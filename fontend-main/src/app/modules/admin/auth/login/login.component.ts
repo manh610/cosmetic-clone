@@ -53,7 +53,8 @@ export class LoginComponent implements OnInit, OnDestroy{
   onSubmit(): void {
     this.submitted = true;
     if (this.loginFrm.valid) {
-      this.doLogin();
+      // this.doLogin();
+      this.router.navigate(['/']);
     }
   }
   doLogin(): void{
