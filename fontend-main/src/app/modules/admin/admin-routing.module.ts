@@ -20,7 +20,6 @@ const routes: Routes = [
         path: '',
         component: DashboardComponent,
         title: 'Dashboard',
-        
       },
       {
         path: 'user',
@@ -32,43 +31,37 @@ const routes: Routes = [
         path: 'category',
         component: CategoryManagementComponent,
         title: 'Quản lý danh mục sản phẩm',
-        
       },
       {
         path: 'brand',
         component: BrandManagementComponent,
         title: 'Quản lý thương hiệu',
-        
+
       },
       {
         path: 'skin-type',
         component: SkinTypeManagementComponent,
         title: 'Quản lý loại da',
-        
       },
       {
         path: 'product',
         loadChildren: () => import("./product-management/product-management.module").then((m) => m.ProductManagementModule),
         title: 'Quản lý sản phẩm',
-        
       },
       {
         path: 'supplier',
         component: SupplierManagementComponent,
         title: 'Quản lý nhà cung cấp',
-        
       },
       {
         path: 'discount',
         component: DiscountManagementComponent,
         title: 'Quản lý mã giảm giá',
-        
       },
       {
         path: 'order',
         component: OrderManagementComponent,
         title: 'Quản lý đơn hàng',
-        
       },
     ]
   }
